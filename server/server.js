@@ -17,6 +17,9 @@ const startServer = async () => {
     // start apollo server
     await server.start();
 
+    // integrate Express as middleware
+    server.applyMiddleware({ app })
+
     // logs GQL test location
     console.log(`GraphQL Test: http://localhost:${PORT}${server.graphqlPath}`)
 }
@@ -25,7 +28,7 @@ const startServer = async () => {
 startServer();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
