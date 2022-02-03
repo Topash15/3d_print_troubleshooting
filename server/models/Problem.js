@@ -20,10 +20,9 @@ const problemSchema = new Schema({
         type: String,
         required: false
     },
-    responses: {
-        type: String,
-        required: true,
-        trim: true
+    firstQuestion: {
+        type: Schema.Types.ObjectId,
+        ref: 'Question'
     }
 })
 

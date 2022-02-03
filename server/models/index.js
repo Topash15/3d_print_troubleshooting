@@ -1,5 +1,5 @@
 const Problem = require('./Problem');
-// const Solution = require('./Solution');
-// const Category = require('./Category');
+const Solution = require('./Solution');
 
-module.exports = { Problem };
+
+module.exports = { Problem, Solution };

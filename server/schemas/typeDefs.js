@@ -9,8 +9,19 @@ const typeDefs = gql`
         photos: String
     }
 
+    type Solution{
+        _id: ID
+        title: String
+        description: String
+        photo: String
+        link: String
+    }
+
     type Query{
         problems: [Problem]
+        problem: Problem
+        solutions: [Solution]
+        Solution: Solution
     }
 
     type Mutation{
