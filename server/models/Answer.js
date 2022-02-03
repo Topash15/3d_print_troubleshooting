@@ -12,11 +12,11 @@ const answerSchema = new Schema({
         type: String,
         required: false
     },
-    nextQuestion: [{
+    nextQuestion: {
         type: Schema.Types.ObjectId,
         ref: 'Question',
         required: false
-    }],
+    },
     Solution: [{
         type: Schema.Types.ObjectId,
         ref: "Solution",

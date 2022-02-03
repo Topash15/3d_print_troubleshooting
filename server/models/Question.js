@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const {Schema} = mongoose;
-const Answer = require('./Answer')
 
 const questionSchema = new Schema ({
     question: {
