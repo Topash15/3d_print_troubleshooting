@@ -1,4 +1,4 @@
-const { Problem, Step, Answer } = require("../models");
+const { Problem, Step, Response } = require("../models");
 
 const resolvers = {
   Query: {
@@ -17,21 +17,12 @@ const resolvers = {
       });
       return problem;
     },
-    // get all answers
-    answers: async (parent, args, context) => {
-      return Answer.find();
-    },
-    // get single answer
-    answer: async (parent, { _id }, context) => {
-      const answer = Answer.findById(_id);
-      return answer;
-    },
     // get all steps
     steps: async (parent, args, context) => {
       return Step.find()
         .populate({
-          path: "answers",
-          populate: "answer",
+          path: "responses",
+          populate: "response",
         })
         .populate("category");
     },
@@ -39,11 +30,20 @@ const resolvers = {
     step: async (parent, { _id }, context) => {
       const step = Step.findById(_id)
         .populate({
-          path: "answers",
-          populate: "answer",
+          path: "responses",
+          populate: "response",
         })
         .populate("category");
       return step;
+    },
+    // get all responses
+    responses: async (parent, args, context) => {
+      return Response.find();
+    },
+    // get single response
+    response: async (parent, { _id }, context) => {
+      const response = Response.findById(_id);
+      return response;
     },
   },
   Mutation: {
@@ -63,11 +63,12 @@ const resolvers = {
       );
       return problem;
     },
-    //deletes firstStep from Problem
     // deletes existing problem
     // creates new step
     addStep: async (parent, args, context) => {
-      const step = await Step.create(args);
+      const step = await Step.create(args)
+      .populate("category")
+      .populate("responses");
       return step;
     },
     // allows changes to existing step and description of Step
@@ -78,7 +79,9 @@ const resolvers = {
           ...args,
         },
         { new: true }
-      );
+      )
+        .populate("category")
+        .populate("responses");
       return step;
     },
     // adds category to step
@@ -89,31 +92,31 @@ const resolvers = {
           $addToSet: { category: args.category },
         },
         { new: true }
-      );
+      ).populate("category");
       return step;
     },
     // deletes category from step
-    // adds answer to step
-    addAnswersStep: async (parent, args, context) => {
+    // adds response to step
+    addResponsesStep: async (parent, args, context) => {
       const step = await Step.findOneAndUpdate(
         args._id,
         {
-          $addToSet: { answers: args.answers },
+          $addToSet: { responses: args.responses },
         },
         { new: true }
-      );
+      ).populate("responses");
       return step;
     },
-    // deletes answer from step
+    // deletes response from step
     // deletes step
-    // creates new answer
-    addAnswer: async (parent, args, context) => {
-      const answer = await Answer.create(args);
-      return answer;
+    // creates new response
+    addResponse: async (parent, args, context) => {
+      const response = await Response.create(args);
+      return response;
     },
-    // add nextStep to answer
-    // deletes nextStep from answer
-    // deletes answer
+    // add nextStep to response
+    // deletes nextStep from response
+    // deletes response
   },
 };
 
