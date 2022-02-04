@@ -35,6 +35,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
+
     addProblem(
       name: String!
       description: String!
@@ -42,6 +43,7 @@ const typeDefs = gql`
       photos: String
       firstStep: String
     ): Problem
+
     editProblem(
       _id: ID!
       name: String
@@ -51,17 +53,26 @@ const typeDefs = gql`
       firstStep: String
     ): Problem
 
+    deleteProblem(_id: ID!): Problem
+
+
     addStep(
       step: String!
       description: String
       links: String
       category: String!
     ): Step
+
     editStep(_id: ID!, step: String, description: String): Step
     addCategoryStep(_id: ID!, category: String!): Step
     addResponsesStep(_id: ID!, responses: String!): Step
+    removeResponsesStep(_id: ID!, responses: String!): Step
+    deleteStep(_id: ID!): Step
 
+    
     addResponse(text: String!, photo: String): Response
+    addNextStep(_id: ID!, nextStep: String!): Response
+    deleteResponse(_id: ID!): Response
   }
 `;
 

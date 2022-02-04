@@ -19,20 +19,12 @@ const resolvers = {
     },
     // get all steps
     steps: async (parent, args, context) => {
-      return Step.find()
-        .populate({
-          path: "responses",
-          populate: "response",
-        })
-        .populate("category");
+      return Step.find().populate("responses").populate("category");
     },
     // get single step
     step: async (parent, { _id }, context) => {
       const step = Step.findById(_id)
-        .populate({
-          path: "responses",
-          populate: "response",
-        })
+        .populate("responses")
         .populate("category");
       return step;
     },
@@ -64,11 +56,15 @@ const resolvers = {
       return problem;
     },
     // deletes existing problem
+    deleteProblem: async (parent, {_id}, context) => {
+      const problem = await Problem.findOneAndDelete(_id, {new: true});
+      return problem
+    },
     // creates new step
     addStep: async (parent, args, context) => {
       const step = await Step.create(args)
-      .populate("category")
-      .populate("responses");
+        .populate("category")
+        .populate("responses");
       return step;
     },
     // allows changes to existing step and description of Step
@@ -84,18 +80,17 @@ const resolvers = {
         .populate("responses");
       return step;
     },
-    // adds category to step
+    // sets category for step
     addCategoryStep: async (parent, args, context) => {
       const step = await Step.findOneAndUpdate(
         args._id,
         {
-          $addToSet: { category: args.category },
+          category: args.category,
         },
         { new: true }
       ).populate("category");
       return step;
     },
-    // deletes category from step
     // adds response to step
     addResponsesStep: async (parent, args, context) => {
       const step = await Step.findOneAndUpdate(
@@ -108,15 +103,42 @@ const resolvers = {
       return step;
     },
     // deletes response from step
+    removeResponsesStep: async (parent, args, context) => {
+      const step = await Step.findOneAndUpdate(
+        args._id,
+        {
+          $pull: { responses: args.responses },
+        },
+        { new: true }
+      ).populate("responses");
+      return step;
+    },
     // deletes step
+    deleteStep: async (parent, {_id}, context) => {
+      const step = await Step.findOneAndDelete(_id, {new: true});
+      return step
+    },
     // creates new response
     addResponse: async (parent, args, context) => {
       const response = await Response.create(args);
       return response;
     },
-    // add nextStep to response
-    // deletes nextStep from response
+    // sets nextStep for response
+    addNextStep: async (parent, args, context) => {
+      const response = await Response.findOneAndUpdate(
+        args._id,
+        {
+          nextStep: args.nextStep,
+        },
+        { new: true }
+      ).populate("nextStep");
+      return response;
+    },
     // deletes response
+    deleteResponse: async (parent, {_id}, context) => {
+      const response = await Response.findOneAndDelete(_id, {new: true});
+      return response
+    },
   },
 };
 
