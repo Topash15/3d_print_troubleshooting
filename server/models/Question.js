@@ -13,9 +13,14 @@ const questionSchema = new Schema ({
         require: false,
         trim: true
     },
-    answer: [{
+    category: [{
         type: Schema.Types.ObjectId,
-        ref: 'Answer'
+        ref: 'Problem'
+    }],
+    answers: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Answer',
+        unique: true
     }]
 })
 

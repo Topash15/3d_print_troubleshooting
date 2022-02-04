@@ -23,31 +23,40 @@ const typeDefs = gql`
         text: String!
         photo: String
         nextQuestion: Question
-        Solution: [Solution]
+        solution: [Solution]
     }
 
     type Question{
         _id: ID
         question: String!
         description: String
-        answer: [Answer]
+        category: [Problem]
+        answers: [Answer]
     }
 
     type Query{
         problems: [Problem]
-        problem: Problem
+        problem(_id: ID!): Problem
         solutions: [Solution]
-        solution: Solution
+        solution(_id: ID!): Solution
         answers: [Answer]
-        answer: Answer
+        answer(_id: ID!): Answer
         questions: [Question]
-        question: Question
+        question(_id: ID!): Question
     }
 
     type Mutation{
-        addProblem(name:String!, description: String!, links: String, photos: String): Problem
-        addQuestion(question:String!, description: String, links: String): Question
+        addProblem(name:String!, description: String!, links: String, photos: String, firstQuestion: String): Problem
+        editProblem(_id: ID!, name:String, description: String, links: String, photos: String, firstQuestion: String): Problem
+
+        addQuestion(question:String!, description: String, links: String, category: String!): Question
+        editQuestion(_id: ID!, question: String, description: String): Question
+        addCategoryQuestion(_id: ID!, category: String): Question
+        addAnswersQuestion(_id: ID!, answers: String): Question
+
         addAnswer(text:String!, photo: String): Answer
+        addSolutionAnswer(_id: ID!, solution: String): Answer
+
         addSolution(title:String!, description: String!, link: String, photo: String): Solution
     }
 `
