@@ -1,30 +1,21 @@
-const { Problem, Solution, Question, Answer } = require("../models");
+const { Problem, Step, Answer } = require("../models");
 
 const resolvers = {
   Query: {
     // get all problems
     problems: async (parent, args, context) => {
       return Problem.find().populate({
-        path: "firstQuestion",
-        populate: "question",
+        path: "firstStep",
+        populate: "step",
       });
     },
     //get single problem
     problem: async (parent, { _id }, context) => {
       const problem = Problem.findById(_id).populate({
-        path: "firstQuestion",
-        populate: "question",
+        path: "firstStep",
+        populate: "step",
       });
       return problem;
-    },
-    // get all solutions
-    solutions: async (parent, args, context) => {
-      return Solution.find();
-    },
-    // get single solution
-    solution: async (parent, { _id }, context) => {
-      const solution = Solution.findById(_id);
-      return solution;
     },
     // get all answers
     answers: async (parent, args, context) => {
@@ -35,20 +26,24 @@ const resolvers = {
       const answer = Answer.findById(_id);
       return answer;
     },
-    // get all questions
-    questions: async (parent, args, context) => {
-      return Question.find().populate({
-        path: "answers",
-        populate: "answer",
-      });
+    // get all steps
+    steps: async (parent, args, context) => {
+      return Step.find()
+        .populate({
+          path: "answers",
+          populate: "answer",
+        })
+        .populate("category");
     },
-    // get single question
-    question: async (parent, { _id }, context) => {
-      const question = Question.findById(_id).populate({
-        path: "answers",
-        populate: "answer",
-      });
-      return question;
+    // get single step
+    step: async (parent, { _id }, context) => {
+      const step = Step.findById(_id)
+        .populate({
+          path: "answers",
+          populate: "answer",
+        })
+        .populate("category");
+      return step;
     },
   },
   Mutation: {
@@ -68,71 +63,57 @@ const resolvers = {
       );
       return problem;
     },
-    //deletes firstQuestion from Problem 
+    //deletes firstStep from Problem
     // deletes existing problem
-    // creates new question
-    addQuestion: async (parent, args, context) => {
-      const question = await Question.create(args);
-      return question;
+    // creates new step
+    addStep: async (parent, args, context) => {
+      const step = await Step.create(args);
+      return step;
     },
-    // allows changes to existing question and description of Question
-    editQuestion: async (parent, args, context) => {
-      const question = await Question.findOneAndUpdate(
+    // allows changes to existing step and description of Step
+    editStep: async (parent, args, context) => {
+      const step = await Step.findOneAndUpdate(
         args._id,
         {
           ...args,
         },
         { new: true }
       );
-      return question;
+      return step;
     },
-    // adds category to question
-    addCategoryQuestion: async (parent, args, context) => {
-      const question = await Question.findOneAndUpdate(
+    // adds category to step
+    addCategoryStep: async (parent, args, context) => {
+      const step = await Step.findOneAndUpdate(
         args._id,
         {
           $addToSet: { category: args.category },
         },
         { new: true }
       );
-      return question;
+      return step;
     },
-    // deletes category from question
-    // adds answer to question
-    addAnswersQuestion: async (parent, args, context) => {
-      const question = await Question.findOneAndUpdate(
+    // deletes category from step
+    // adds answer to step
+    addAnswersStep: async (parent, args, context) => {
+      const step = await Step.findOneAndUpdate(
         args._id,
         {
           $addToSet: { answers: args.answers },
         },
         { new: true }
       );
-      return question;
+      return step;
     },
-    // deletes answer from question
-    // deletes question
+    // deletes answer from step
+    // deletes step
     // creates new answer
     addAnswer: async (parent, args, context) => {
       const answer = await Answer.create(args);
       return answer;
     },
-    // add solution to answer
-    addSolutionAnswer: async (parent, args, context) => {
-      const answer = findOneAndUpdate(args._id, {
-        nextQuestion: null,
-        $addToSet: {solution: args.solution}
-      })
-    },
-    // add nextQuestion to answer
-    // deletes nextQuestion from answer
-    // deletes solution from answer
+    // add nextStep to answer
+    // deletes nextStep from answer
     // deletes answer
-    // creates new solution
-    addSolution: async (parent, args, context) => {
-      const solution = await Solution.create(args);
-      return solution;
-    },
-    // deletes solution
   },
 };
 

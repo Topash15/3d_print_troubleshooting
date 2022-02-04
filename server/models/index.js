@@ -1,7 +1,6 @@
 const Problem = require('./Problem');
-const Solution = require('./Solution');
-const Question = require('./Question');
+const Step = require('./Step');
 const Answer = require('./Answer');
 
 
-module.exports = { Problem, Solution, Question, Answer };
+module.exports = { Problem, Step, Answer };

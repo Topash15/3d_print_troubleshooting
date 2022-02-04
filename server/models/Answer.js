@@ -12,16 +12,11 @@ const answerSchema = new Schema({
         type: String,
         required: false
     },
-    nextQuestion: {
+    nextStep: {
         type: Schema.Types.ObjectId,
-        ref: 'Question',
+        ref: 'Step',
         required: false
-    },
-    Solution: [{
-        type: Schema.Types.ObjectId,
-        ref: "Solution",
-        required: false
-    }]
+    }
 })
 
 const Answer = mongoose.model('Answer', answerSchema);

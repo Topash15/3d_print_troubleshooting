@@ -20,9 +20,9 @@ const problemSchema = new Schema({
         type: String,
         required: false
     },
-    firstQuestion: {
+    firstStep: {
         type: Schema.Types.ObjectId,
-        ref: 'Question'
+        ref: 'Step'
     }
 })
 

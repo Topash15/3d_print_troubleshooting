@@ -7,28 +7,19 @@ const typeDefs = gql`
         description: String
         links: String
         photos: String
-        firstQuestion: Question
-    }
-
-    type Solution{
-        _id: ID
-        title: String
-        description: String
-        photo: String
-        link: String
+        firstStep: Step
     }
 
     type Answer{
         _id: ID
         text: String!
         photo: String
-        nextQuestion: Question
-        solution: [Solution]
+        nextStep: Step
     }
 
-    type Question{
+    type Step{
         _id: ID
-        question: String!
+        step: String!
         description: String
         category: [Problem]
         answers: [Answer]
@@ -37,27 +28,22 @@ const typeDefs = gql`
     type Query{
         problems: [Problem]
         problem(_id: ID!): Problem
-        solutions: [Solution]
-        solution(_id: ID!): Solution
         answers: [Answer]
         answer(_id: ID!): Answer
-        questions: [Question]
-        question(_id: ID!): Question
+        steps: [Step]
+        step(_id: ID!): Step
     }
 
     type Mutation{
-        addProblem(name:String!, description: String!, links: String, photos: String, firstQuestion: String): Problem
-        editProblem(_id: ID!, name:String, description: String, links: String, photos: String, firstQuestion: String): Problem
+        addProblem(name:String!, description: String!, links: String, photos: String, firstStep: String): Problem
+        editProblem(_id: ID!, name:String, description: String, links: String, photos: String, firstStep: String): Problem
 
-        addQuestion(question:String!, description: String, links: String, category: String!): Question
-        editQuestion(_id: ID!, question: String, description: String): Question
-        addCategoryQuestion(_id: ID!, category: String): Question
-        addAnswersQuestion(_id: ID!, answers: String): Question
+        addStep(step:String!, description: String, links: String, category: String!): Step
+        editStep(_id: ID!, step: String, description: String): Step
+        addCategoryStep(_id: ID!, category: String!): Step
+        addAnswersStep(_id: ID!, answers: String!): Step
 
-        addAnswer(text:String!, photo: String): Answer
-        addSolutionAnswer(_id: ID!, solution: String): Answer
-
-        addSolution(title:String!, description: String!, link: String, photo: String): Solution
+        addAnswer(text:String!, photo: String!): Answer
     }
 `
 

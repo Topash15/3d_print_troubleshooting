@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const {Schema} = mongoose;
 
-const questionSchema = new Schema ({
-    question: {
+const stepSchema = new Schema ({
+    step: {
         type: String,
         require: true,
         trim: true
@@ -24,6 +24,6 @@ const questionSchema = new Schema ({
     }]
 })
 
-const Question = mongoose.model('Question', questionSchema);
+const Step = mongoose.model('Step', stepSchema);
 
-module.exports = Question;
+module.exports = Step;
