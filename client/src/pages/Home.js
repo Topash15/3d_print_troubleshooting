@@ -2,14 +2,14 @@ import React from 'react';
 
 // Components
 import Nav from '../components/Nav';
-// import Hero from '../components/Hero';
+import Hero from '../components/Hero';
 import Footer from '../components/Footer';
 
 function Home (){
     return(
         <div>
             < Nav />
-            {/* < Hero /> */}
+            < Hero />
             < Footer />
         </div>
     )

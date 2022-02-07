@@ -5,7 +5,7 @@ import { createHttpLink, ApolloClient, InMemoryCache, ApolloProvider } from "@ap
 
 // Pages
 import Home from "./pages/Home";
-import Step from "./pages/Step";
+// import Step from "./pages/Step";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
