@@ -63,8 +63,6 @@ const resolvers = {
     // creates new step
     addStep: async (parent, args, context) => {
       const step = await Step.create(args)
-        .populate("category")
-        .populate("responses");
       return step;
     },
     // allows changes to existing step and description of Step
