@@ -10,13 +10,12 @@ function Hero() {
   console.log("state");
   console.log(state);
 
-  const { loading, error, data: problemData} = useQuery(QUERY_ALL_PROBLEMS);
+  const { loading, error, data} = useQuery(QUERY_ALL_PROBLEMS);
   if (loading) {
       console.log('loading')
   } else if (error) {
       console.log(error)
   }
-  const {problems} = state;
   
 
 //   useEffect(() => {
@@ -40,12 +39,12 @@ function Hero() {
 
   return (
     <div>
-      {problems.map((problem) => (
+      {data? data.problems.map((problem) => (
           <div key={problem._id}>
             <h2>{problem.name}</h2>
             <p>{problem.description}</p>
           </div>
-      ))}      
+      )):null}      
     </div>
   );
 }
