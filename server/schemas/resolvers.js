@@ -4,17 +4,11 @@ const resolvers = {
   Query: {
     // get all problems
     problems: async (parent, args, context) => {
-      return Problem.find().populate({
-        path: "firstStep",
-        populate: "step",
-      });
+      return Problem.find().populate("firstStep");
     },
     //get single problem
     problem: async (parent, { _id }, context) => {
-      const problem = Problem.findById(_id).populate({
-        path: "firstStep",
-        populate: "step",
-      });
+      const problem = Problem.findById(_id).populate("firstStep");
       return problem;
     },
     // get all steps
