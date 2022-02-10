@@ -1,7 +1,7 @@
 import { gql } from "graphql-tag";
 
 export const QUERY_ALL_PROBLEMS = gql`
-  query Query {
+  query getAllProblems {
     problems {
       _id
       name
@@ -18,7 +18,7 @@ export const QUERY_ALL_PROBLEMS = gql`
 `;
 
 export const QUERY_PROBLEM = gql`
-  query Query($id: ID!) {
+  query getProblem($id: ID!) {
     problem(_id: $id) {
       _id
       name
@@ -35,7 +35,7 @@ export const QUERY_PROBLEM = gql`
 `;
 
 export const QUERY_STEP = gql`
-  query Query($id: ID!) {
+  query getStep($id: ID!) {
     step(_id: $id) {
       _id
       step
@@ -57,7 +57,7 @@ export const QUERY_STEP = gql`
 `;
 
 export const QUERY_RESPONSE = gql`
-  query Query($id: ID!) {
+  query getResponse($id: ID!) {
     response(_id: $id) {
       _id
       text

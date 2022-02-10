@@ -2,14 +2,14 @@ import React from 'react';
 
 // Components
 import Nav from '../components/Nav';
-// import ProblemList from '../components/ProblemList';
 import Footer from '../components/Footer';
+import StepDetails from '../components/StepDetails';
 
 function Step (){
     return(
         <div>
             < Nav />
-            {/* < ProblemList /> */}
+            <StepDetails />
             < Footer />
         </div>
     )

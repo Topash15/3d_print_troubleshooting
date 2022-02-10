@@ -6,7 +6,7 @@ function Footer() {
     <footer>
       <ul className="footer-list">
         <li className="footer-list-item">
-          <a className="footer-link" href="#">Home</a>
+          <a className="footer-link" href="/">Home</a>
         </li>
         <li className="footer-list-item">
           <a className="footer-link" href="#">Feedback</a>
