@@ -8,7 +8,6 @@ import { UPDATE_PROBLEMS } from '../../utils/actions'
 function Hero() {
     // calls global state
   const [state, dispatch] = useGlobalContext();
-  console.log("state");
   console.log(state);
 
 //   queries db for all Problems
@@ -18,8 +17,6 @@ function Hero() {
   } else if (error) {
       console.log(error)
   }
-  console.log('data')
-  console.log(problemData);
  
 
   useEffect(() => {
@@ -28,12 +25,17 @@ function Hero() {
         type: UPDATE_PROBLEMS,
         problems: problemData.problems,
       });
-      console.log('problems updated')
     }
   }, [problemData, loading, dispatch]);
 
   return (
     <div>
+      <div>
+        <h2>Problem 1</h2>
+        <p>Description goes here</p>
+        <img src='https://i.imgur.com/aD2DE2D.jpeg'></img>
+        <a href='http://www.google.com'>Click here to learn more</a>
+      </div>
       {problemData ? (problemData.problems.map((problem) => (
           <div key={problem._id}>
             <h2>{problem.name}</h2>
