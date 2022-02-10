@@ -1,0 +1,25 @@
+nav{
+    background-color: var(--primary);
+}
+
+.nav-web-title{
+
+}
+
+.nav-list{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-left: 10em;
+    margin-right: 10em;
+}
+
+.nav-list-item{
+    padding: 1em;
+}
+
+.nav-link{
+    text-decoration: none;
+    font-style: italic;
+    color: var(--text);
+}

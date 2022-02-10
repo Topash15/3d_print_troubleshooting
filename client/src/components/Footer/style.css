@@ -1,0 +1,25 @@
+footer{
+    background-color: var(--primary);
+}
+
+.footer-web-title{
+
+}
+
+.footer-list{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-left: 10em;
+    margin-right: 10em;
+}
+
+.footer-list-item{
+    padding: 1em;
+}
+
+.footer-link{
+    text-decoration: none;
+    font-style: italic;
+    color: var(--text);
+}

@@ -1,18 +1,19 @@
 import React from "react";
+import './style.css'
 
 function Nav() {
   return (
     <nav>
       <h1 className="nav-web-title">3D Print Troubleshooting Guide</h1>
-      <ul>
-        <li>
-          <a href="#">Home</a>
+      <ul className="nav-list">
+        <li className="nav-list-item">
+          <a className="nav-link" href="#">Home</a>
         </li>
-        <li>
-          <a href="#">Feedback</a>
+        <li className="nav-list-item">
+          <a className="nav-link" href="#">Feedback</a>
         </li>
-        <li>
-          <a href="#">Contact</a>
+        <li className="nav-list-item">
+          <a className="nav-link" href="#">Contact</a>
         </li>
       </ul>
     </nav>
