@@ -2,17 +2,20 @@ import { useReducer } from "react";
 import { UPDATE_PROBLEMS } from "./actions";
 
 export const reducer = (state, action) => {
+
   switch (action.type) {
     // if action type value is 'UPDATE_PROBLEMS'
     // return new state with updated problem list
-    case UPDATE_PROBLEMS:
+    case UPDATE_PROBLEMS: {
       return {
         ...state,
         problems: [...action.problems],
       };
+    }
+    default: return state;
   }
 };
 
-export function useProductReducer(initialState) {
+export function useGlobalReducer(initialState) {
   return useReducer(reducer, initialState);
 }

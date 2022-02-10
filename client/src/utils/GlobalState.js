@@ -1,21 +1,23 @@
 import React, { createContext, useContext } from 'react';
-import { useProductReducer } from './reducers';
+import { useGlobalReducer } from './reducers';
 
-const StoreContext = createContext();
-const { Provider } = StoreContext;
+// creates global context
+const GlobalContext = createContext();
 
-const StoreProvider = ({ value = [], ...props}) => {
-    const [state, dispatch] = useProductReducer({
+// sets initial global state by calling global reducer
+// returns provider for so other components can access state
+const GlobalProvider = ({ value = [], ...props}) => {
+    const [state, dispatch] = useGlobalReducer({
         problems: [],
         currentProblem: '',
         currentStep: ''
     });
-    console.log(state);
-    return <Provider value = {[state,dispatch]} {...props} />;
+    return <GlobalContext.Provider value = {[state,dispatch]} {...props} />;
 };
 
-const useStoreContext = () => {
-    return useContext(StoreContext);
+// 
+const useGlobalContext = () => {
+    return useContext(GlobalContext);
 }
 
-export {StoreProvider, useStoreContext};
+export {GlobalProvider, useGlobalContext};

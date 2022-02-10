@@ -1,6 +1,5 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { StoreProvider } from "./utils/GlobalState";
+import { GlobalProvider } from "./utils/GlobalState";
 import { createHttpLink, ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
@@ -32,10 +31,10 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <StoreProvider>
+        <GlobalProvider>
           <Home />
           {/* <Step /> */}
-        </StoreProvider>
+        </GlobalProvider>
       </div>
     </ApolloProvider>
   );
