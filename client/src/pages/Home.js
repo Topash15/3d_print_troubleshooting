@@ -2,14 +2,14 @@ import React from 'react';
 
 // Components
 import Nav from '../components/Nav';
-import Hero from '../components/Hero';
+import ProblemList from '../components/ProblemList';
 import Footer from '../components/Footer';
 
 function Home (){
     return(
         <div>
             < Nav />
-            < Hero />
+            < ProblemList />
             < Footer />
         </div>
     )

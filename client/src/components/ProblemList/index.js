@@ -6,7 +6,7 @@ import { useGlobalContext } from "../../utils/GlobalState";
 import { UPDATE_PROBLEMS } from "../../utils/actions";
 import "./style.css";
 
-function Hero() {
+function ProblemList() {
   // calls global state
   const [state, dispatch] = useGlobalContext();
   console.log(state);
@@ -84,7 +84,7 @@ function Hero() {
                 <a className="problem-card-link" href={problem.link}>
                   Click here to learn more
                 </a>
-                <button id={problem._id} className="problem-card-btn">
+                <button id={problem.firstStep._id} className="problem-card-btn" >
                   This is my Problem
                 </button>
               </div>
@@ -95,4 +95,4 @@ function Hero() {
   );
 }
 
-export default Hero;
+export default ProblemList;
