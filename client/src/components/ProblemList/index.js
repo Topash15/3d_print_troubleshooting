@@ -84,9 +84,9 @@ function ProblemList() {
                 <a className="problem-card-link" href={problem.link}>
                   Click here to learn more
                 </a>
-                <button id={problem.firstStep._id} className="problem-card-btn" >
+                <a id={problem.firstStep._id} className="problem-card-btn" href={`#` + problem.firstStep._id}>
                   This is my Problem
-                </button>
+                </a>
               </div>
             ))
           : null}

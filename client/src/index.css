@@ -1,9 +1,10 @@
 /* Main Page */
 
 :root{
-  --primary: red;
+  --primary: rgb(255, 179, 0);
   --secondary: rgb(37, 37, 37);
   --text: black;
+  background: rgb(177, 177, 177);
 }
 
 * {

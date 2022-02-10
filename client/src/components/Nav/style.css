@@ -1,9 +1,10 @@
 nav{
     background-color: var(--primary);
+    padding: 1em 1em;
 }
 
 .nav-web-title{
-
+    text-shadow: 0 1px gray;
 }
 
 .nav-list{

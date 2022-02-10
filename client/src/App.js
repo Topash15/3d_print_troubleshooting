@@ -2,7 +2,7 @@ import "./App.css";
 import { GlobalProvider } from "./utils/GlobalState";
 import { createHttpLink, ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-
+import { Routes, Route} from 'react-router-dom';
 
 // Pages
 import Home from "./pages/Home";
@@ -32,8 +32,12 @@ function App() {
     <ApolloProvider client={client}>
       <div className="App">
         <GlobalProvider>
-          <Home />
-          {/* <Step /> */}
+          <Routes>
+            <Route path='/' element={<Home />}></Route>
+            {/* <Route path='step/:id' element={<Step />}></Route> */}
+            {/* <Route path='/feedback' element={<Feedback />}></Route> */}
+            {/* <Route path='/contact' element={<Contact />}></Route> */}
+          </Routes>
         </GlobalProvider>
       </div>
     </ApolloProvider>
