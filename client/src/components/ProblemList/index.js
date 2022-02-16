@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_PROBLEMS } from "../../utils/queries";
 import { useGlobalContext } from "../../utils/GlobalState";
-// import { idbPromise } from "../../utils/helper";
-import { UPDATE_PROBLEMS } from "../../utils/actions";
+import { idbPromise } from "../../utils/helper";
+import { UPDATE_PROBLEMS, UPDATE_CURRENT_PROBLEM } from "../../utils/actions";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 function ProblemList() {
@@ -25,50 +26,33 @@ function ProblemList() {
         type: UPDATE_PROBLEMS,
         problems: problemData.problems,
       });
+      problemData.problems.forEach((problem) => {
+        idbPromise("problems", "put", problem);
+      });
+    } else if (!loading) {
+      idbPromise("problems", "get").then((problems) => {
+        dispatch({
+          type: UPDATE_PROBLEMS,
+          problems: problemData.problems,
+        });
+      });
     }
   }, [problemData, loading, dispatch]);
+
+  const navigate = useNavigate();
+
+  const selectProblem = (id) => {
+    dispatch({
+      type: UPDATE_CURRENT_PROBLEM,
+      currentProblem: id
+    })
+    navigate('/step/' + id)
+  };
 
   return (
     <section className="problem-section">
       {/* future search bar */}
       <div className="problem-card-container">
-        <div className="problem-card">
-          <h2 className="problem-card-title">Dummy Problem</h2>
-          <p className="problem-card-description">Description goes here</p>
-          <img
-            alt=""
-            className="problem-card-image"
-            src="https://i.imgur.com/aD2DE2D.jpeg"
-          ></img>
-          <a className="problem-card-link" href="http://www.google.com">
-            Click here to learn more
-          </a>
-          <button className="problem-card-btn">This is my Problem</button>
-        </div>
-        <div className="problem-card">
-          <h2 className="problem-card-title">Dummy Problem</h2>
-          <p className="problem-card-description">Description goes here</p>
-          <img
-            className="problem-card-image"
-            src="https://i.imgur.com/aD2DE2D.jpeg"
-          ></img>
-          <a className="problem-card-link" href="http://www.google.com">
-            Click here to learn more
-          </a>
-          <button className="problem-card-btn">This is my Problem</button>
-        </div>
-        <div className="problem-card">
-          <h2 className="problem-card-title">Dummy Problem</h2>
-          <p className="problem-card-description">Description goes here</p>
-          <img
-            className="problem-card-image"
-            src="https://i.imgur.com/aD2DE2D.jpeg"
-          ></img>
-          <a className="problem-card-link" href="http://www.google.com">
-            Click here to learn more
-          </a>
-          <button className="problem-card-btn">This is my Problem</button>
-        </div>
         {problemData
           ? problemData.problems.map((problem) => (
               <div key={problem._id} className="problem-card">
@@ -84,9 +68,14 @@ function ProblemList() {
                 <a className="problem-card-link" href={problem.link}>
                   Click here to learn more
                 </a>
-                <a id={problem.firstStep._id} className="problem-card-btn" href={`/step/` + problem.firstStep._id}>
+                <button
+                  className="problem-card-btn"
+                  onClick={() => {
+                    selectProblem(problem.firstStep._id);
+                  }}
+                >
                   This is my Problem
-                </a>
+                </button>
               </div>
             ))
           : null}

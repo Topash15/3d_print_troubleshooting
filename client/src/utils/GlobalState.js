@@ -12,6 +12,7 @@ const GlobalProvider = ({ value = [], ...props}) => {
         currentProblem: '',
         currentStep: ''
     });
+    console.log(state)
     return <GlobalContext.Provider value = {[state,dispatch]} {...props} />;
 };
 

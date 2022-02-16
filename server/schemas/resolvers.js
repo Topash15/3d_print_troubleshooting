@@ -4,7 +4,7 @@ const resolvers = {
   Query: {
     // get all problems
     problems: async (parent, args, context) => {
-      return Problem.find().populate("firstStep");
+      return Problem.find().populate("firstStep").populate("firstStep.responses");
     },
     //get single problem
     problem: async (parent, { _id }, context) => {
