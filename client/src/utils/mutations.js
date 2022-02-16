@@ -21,3 +21,27 @@ export const CREATE_PROBLEM = gql`
     }
   }
 `;
+
+export const CREATE_STEP = gql`
+  mutation Mutation(
+    $step: String!
+    $category: String!
+    $description: String
+    $links: String
+  ) {
+    addStep(
+      step: $step
+      category: $category
+      description: $description
+      links: $links
+    ) {
+      _id
+      step
+      description
+      category {
+        _id
+        name
+      }
+    }
+  }
+`;
