@@ -13,8 +13,8 @@ function StepDetails() {
   const [state, dispatch] = useGlobalContext();
   console.log(state);
   const { id } = useParams();
-  // console.log(id);
 
+  // queries db for current step data
   const { loading, error, data } = useQuery(QUERY_STEP, {
     variables: { id },
   });
@@ -25,11 +25,12 @@ function StepDetails() {
 
   const navigate = useNavigate();
 
+  // used to load next step
   const loadNextStep = (id) => {
-    console.log(id);
     if (id) {
       navigate("/step/" + id);
     } else {
+      // loads 404 page if next step not defined
       navigate("/404");
     }
   };
@@ -48,7 +49,7 @@ function StepDetails() {
               <button
                 id={response.nextStep}
                 onClick={()=>{loadNextStep(response.nextStep)}}
-                href={"/#/step/" + response.nextStep}
+                href={"/step/" + response.nextStep}
               >
                 {response.text}
               </button>

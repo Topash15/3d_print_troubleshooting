@@ -10,7 +10,9 @@ const GlobalProvider = ({ value = [], ...props}) => {
     const [state, dispatch] = useGlobalReducer({
         problems: [],
         currentProblem: '',
-        currentStep: ''
+        currentStep: '',
+        action: '',
+        type: ''
     });
     console.log(state)
     return <GlobalContext.Provider value = {[state,dispatch]} {...props} />;

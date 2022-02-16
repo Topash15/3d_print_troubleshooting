@@ -44,9 +44,9 @@ function ProblemList() {
   const selectProblem = (id) => {
     dispatch({
       type: UPDATE_CURRENT_PROBLEM,
-      currentProblem: id
-    })
-    navigate('/step/' + id)
+      currentProblem: id,
+    });
+    navigate("/step/" + id);
   };
 
   return (
@@ -60,11 +60,13 @@ function ProblemList() {
                 <p className="problem-card-description">
                   {problem.description}
                 </p>
-                <img
-                  alt={problem.name}
-                  className="problem-card-image"
-                  src={problem.photos}
-                ></img>
+                {problem.photos ? (
+                  <img
+                    alt={problem.name}
+                    className="problem-card-image"
+                    src={problem.photos}
+                  ></img>
+                ) : null}
                 <a className="problem-card-link" href={problem.link}>
                   Click here to learn more
                 </a>

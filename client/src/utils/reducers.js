@@ -1,6 +1,5 @@
 import { useReducer } from "react";
-import { UPDATE_PROBLEMS, UPDATE_CURRENT_PROBLEM
-} from "./actions";
+import { UPDATE_PROBLEMS, UPDATE_CURRENT_PROBLEM } from "./actions";
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -14,7 +13,7 @@ export const reducer = (state, action) => {
     case UPDATE_CURRENT_PROBLEM:
       return {
         ...state,
-        currentProblem: action.currentProblem
+        currentProblem: action.currentProblem,
       };
     default:
       return state;

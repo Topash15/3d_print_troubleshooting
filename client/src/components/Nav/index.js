@@ -15,6 +15,9 @@ function Nav() {
         <li className="nav-list-item">
           <a className="nav-link" href="#">Contact</a>
         </li>
+        <li className="nav-list-item">
+          <a className="nav-link" href="/create-entry">Create Entry</a>
+        </li>
       </ul>
     </nav>
   );
