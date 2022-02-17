@@ -91,3 +91,25 @@ export const EDIT_PROBLEM = gql`
     }
   }
 `;
+
+export const ADD_RESPONSE_TO_STEP = gql`
+  mutation Mutation($id: ID!, $responses: String!) {
+    addResponsesStep(_id: $id, responses: $responses) {
+      _id
+      step
+      description
+      category {
+        _id
+        name
+      }
+      responses {
+        _id
+        text
+        photo
+        nextStep {
+          _id
+        }
+      }
+    }
+  }
+`;

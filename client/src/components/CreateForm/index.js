@@ -9,11 +9,29 @@ import {
   CREATE_STEP,
   CREATE_RESPONSE,
   EDIT_PROBLEM,
+  ADD_RESPONSE_TO_STEP,
 } from "../../utils/mutations";
 
 function EntryForm() {
   // calls global state
   const [state, dispatch] = useGlobalContext();
+
+  //   queries db for all Problems
+  const { loading, error, data: problemData } = useQuery(QUERY_ALL_PROBLEMS);
+  if (loading) {
+    console.log("loading");
+  } else if (error) {
+    console.log(error);
+  }
+
+  useEffect(() => {
+    if (problemData) {
+      dispatch({
+        type: UPDATE_PROBLEMS,
+        problems: problemData.problems,
+      });
+    }
+  }, [problemData, loading, dispatch]);
 
   // PROBLEM CREATE FUNCTIONS
   // creates state for problem form
@@ -27,7 +45,6 @@ function EntryForm() {
   const [createProblem] = useMutation(CREATE_PROBLEM);
 
   async function submitHandler(e) {
-    e.preventDefault();
     const valid = await validate(problemForm);
 
     if (!valid) {
@@ -95,7 +112,6 @@ function EntryForm() {
   const [editProblem] = useMutation(EDIT_PROBLEM);
 
   async function submitStepHandler(e) {
-    e.preventDefault();
     const valid = await validateStep(stepForm);
 
     if (!valid) {
@@ -112,15 +128,12 @@ function EntryForm() {
         },
       });
       const stepId = mutationResponse.data.addStep._id;
-      console.log(stepId);
-      console.log(stepForm.problem);
       const problemMutationResponse = await editProblem({
         variables: {
           id: stepForm.problem,
           steps: stepId,
         },
       });
-      console.log(problemMutationResponse);
     }
   }
 
@@ -173,14 +186,15 @@ function EntryForm() {
     step: "",
     nextStep: "",
     problem: "",
+    steps: [],
     errors: [],
   });
 
   // creates function for adding response to database
   const [createResponse] = useMutation(CREATE_RESPONSE);
+  const [addResponseToStep] = useMutation(ADD_RESPONSE_TO_STEP);
 
   async function submitResponseHandler(e) {
-    e.preventDefault();
     const valid = await validateResponse(responseForm);
 
     if (!valid) {
@@ -191,6 +205,13 @@ function EntryForm() {
         variables: {
           text: responseForm.text,
           photo: responseForm.photo,
+        },
+      });
+      const responseId = mutationResponse.data.addResponse._id;
+      const stepMutationResponse = await addResponseToStep({
+        variables: {
+          id: responseForm.step,
+          responses: responseId,
         },
       });
     }
@@ -206,24 +227,20 @@ function EntryForm() {
   };
 
   const filterSteps = () => {
-    let { problem } = responseForm;
-    if (problem) {
-      return;
+    if (responseForm.problem) {
+      let chosenProblem = state.problems.filter(
+        (problem) => problem._id === responseForm.problem
+      );
+      return chosenProblem[0].steps;
     }
   };
 
   const validateResponse = async (responseForm) => {
-    const { name, description } = responseForm;
+    const { text } = responseForm;
     const errors = [];
 
-    if (!name) {
-      errors.push({ type: "name", message: "Valid name is required" });
-    }
-    if (!description) {
-      errors.push({
-        type: "description",
-        message: "Valid description is required",
-      });
+    if (!text) {
+      errors.push({ type: "text", message: "Valid text is required" });
     }
 
     setResponseForm({
@@ -237,14 +254,6 @@ function EntryForm() {
       return true;
     }
   };
-
-  //   queries db for all Problems
-  const { loading, error, data: problemData } = useQuery(QUERY_ALL_PROBLEMS);
-  if (loading) {
-    console.log("loading");
-  } else if (error) {
-    console.log(error);
-  }
 
   return (
     <section>
@@ -289,13 +298,15 @@ function EntryForm() {
         <input name="link" type="text" onChange={handleStepChange}></input>
         <button type="submit"> Submit </button>
       </form>
-      <form className="form createResponse">
+      <div>{responseForm.problem}</div>
+      <form className="form createResponse" onSubmit={submitResponseHandler}>
         <h1>Response</h1>
-        <p>
-          First you must select which problem and step you the response is for
-        </p>
+        <label>
+          First you must select which problem and step the response is for
+        </label>
         {problemData ? (
           <select name="problem" onChange={handleResponseChange}>
+            <option value="">Choose a problem</option>
             {problemData.problems.map((problem) => (
               <option key={problem._id} value={problem._id}>
                 {problem.name}
@@ -303,19 +314,37 @@ function EntryForm() {
             ))}
           </select>
         ) : null}
-      </form>
-      {/* <h1>Response</h1>
+        {responseForm.problem ? (
+          <select name="step" defaultValue="" onChange={handleResponseChange}>
+            <option value="">Choose a step</option>
+            {filterSteps().map((step) => (
+              <option
+                key={step._id}
+                value={step._id}
+                onChange={handleResponseChange}
+              >
+                {step.step}
+              </option>
+            ))}
+          </select>
+        ) : null}
         <label>Name</label>
-        <input type="text"></input>
+        <input type="text" name="text" onChange={handleResponseChange}></input>
         <label>Description</label>
-        <textarea name="name" type="text"></textarea>
+        <textarea
+          name="description"
+          type="text"
+          onChange={handleResponseChange}
+        ></textarea>
         <label>Photo Direct Link</label>
-        <input type="text"></input>
+        <input type="text" name="photo" onChange={handleResponseChange}></input>
         <label>Useful URL</label>
-        <input type="text"></input>
+        <input type="text" name="link" onChange={handleResponseChange}></input>
         <label>Add another Response?</label>
-        if checked, add second response form */}
-      <input type="checkbox"></input>
+        {/* if checked, add second response form */}
+        <input type="checkbox"></input>
+        <button>Submit</button>
+      </form>
     </section>
   );
 }
