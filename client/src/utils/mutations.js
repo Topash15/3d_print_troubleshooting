@@ -45,3 +45,49 @@ export const CREATE_STEP = gql`
     }
   }
 `;
+
+export const CREATE_RESPONSE = gql`
+  mutation Mutation($text: String!, $photo: String) {
+    addResponse(text: $text, photo: $photo) {
+      _id
+      text
+      photo
+    }
+  }
+`;
+
+export const EDIT_PROBLEM = gql`
+  mutation Mutation(
+    $id: ID!
+    $name: String
+    $description: String
+    $links: String
+    $photos: String
+    $firstStep: String
+    $steps: String
+  ) {
+    editProblem(
+      _id: $id
+      name: $name
+      description: $description
+      links: $links
+      photos: $photos
+      firstStep: $firstStep
+      steps: $steps
+    ) {
+      _id
+      name
+      description
+      links
+      photos
+      firstStep {
+        _id
+        step
+      }
+      steps {
+        _id
+        step
+      }
+    }
+  }
+`;

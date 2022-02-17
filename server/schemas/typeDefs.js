@@ -8,6 +8,7 @@ const typeDefs = gql`
     links: String
     photos: String
     firstStep: Step
+    steps: [Step]
   }
 
   type Response {
@@ -21,7 +22,7 @@ const typeDefs = gql`
     _id: ID
     step: String!
     description: String
-    category: [Problem]
+    category: Problem
     responses: [Response]
   }
 
@@ -51,6 +52,7 @@ const typeDefs = gql`
       links: String
       photos: String
       firstStep: String
+      steps: String
     ): Problem
 
     deleteProblem(_id: ID!): Problem

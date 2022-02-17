@@ -41,12 +41,17 @@ function ProblemList() {
 
   const navigate = useNavigate();
 
-  const selectProblem = (id) => {
-    dispatch({
-      type: UPDATE_CURRENT_PROBLEM,
-      currentProblem: id,
-    });
-    navigate("/step/" + id);
+  const selectProblem = (firstStep) => {
+    if (firstStep) {
+      const {_id} = firstStep;
+      dispatch({
+        type: UPDATE_CURRENT_PROBLEM,
+        currentProblem: _id,
+      });
+      navigate("/step/" + _id);
+    } else {
+      navigate('/404')
+    }
   };
 
   return (
@@ -73,7 +78,7 @@ function ProblemList() {
                 <button
                   className="problem-card-btn"
                   onClick={() => {
-                    selectProblem(problem.firstStep._id);
+                    selectProblem(problem.firstStep);
                   }}
                 >
                   This is my Problem

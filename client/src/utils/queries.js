@@ -13,6 +13,11 @@ export const QUERY_ALL_PROBLEMS = gql`
         step
         description
       }
+      steps {
+        _id
+        step
+        description
+      }
     }
   }
 `;

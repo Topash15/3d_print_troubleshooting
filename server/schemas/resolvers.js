@@ -4,11 +4,16 @@ const resolvers = {
   Query: {
     // get all problems
     problems: async (parent, args, context) => {
-      return Problem.find().populate("firstStep").populate("firstStep.responses");
+      return Problem.find()
+        .populate("firstStep")
+        .populate("firstStep.responses")
+        .populate("steps");
     },
     //get single problem
     problem: async (parent, { _id }, context) => {
-      const problem = Problem.findById(_id).populate("firstStep");
+      const problem = Problem.findById(_id)
+        .populate("firstStep")
+        .populate("steps");
       return problem;
     },
     // get all steps
@@ -40,28 +45,28 @@ const resolvers = {
     },
     // allows changes to existing problem
     editProblem: async (parent, args, context) => {
-      const problem = await Problem.findOneAndUpdate(
+      const problem = await Problem.findByIdAndUpdate(
         args._id,
         {
-          ...args,
+          $addToSet: { steps: args.steps }
         },
         { new: true }
-      );
+      ).populate('steps');
       return problem;
     },
     // deletes existing problem
-    deleteProblem: async (parent, {_id}, context) => {
-      const problem = await Problem.findOneAndDelete(_id, {new: true});
-      return problem
+    deleteProblem: async (parent, { _id }, context) => {
+      const problem = await Problem.findByIdAndDelete(_id, { new: true });
+      return problem;
     },
     // creates new step
     addStep: async (parent, args, context) => {
-      const step = await Step.create(args)
+      const step = await Step.create(args);
       return step;
     },
     // allows changes to existing step and description of Step
     editStep: async (parent, args, context) => {
-      const step = await Step.findOneAndUpdate(
+      const step = await Step.findByIdAndUpdate(
         args._id,
         {
           ...args,
@@ -85,7 +90,7 @@ const resolvers = {
     },
     // adds response to step
     addResponsesStep: async (parent, args, context) => {
-      const step = await Step.findOneAndUpdate(
+      const step = await Step.findByIdAndUpdate(
         args._id,
         {
           $addToSet: { responses: args.responses },
@@ -96,7 +101,7 @@ const resolvers = {
     },
     // deletes response from step
     removeResponsesStep: async (parent, args, context) => {
-      const step = await Step.findOneAndUpdate(
+      const step = await Step.findByIdAndUpdate(
         args._id,
         {
           $pull: { responses: args.responses },
@@ -106,9 +111,9 @@ const resolvers = {
       return step;
     },
     // deletes step
-    deleteStep: async (parent, {_id}, context) => {
-      const step = await Step.findOneAndDelete(_id, {new: true});
-      return step
+    deleteStep: async (parent, { _id }, context) => {
+      const step = await Step.findByIdAndDelete(_id, { new: true });
+      return step;
     },
     // creates new response
     addResponse: async (parent, args, context) => {
@@ -117,7 +122,7 @@ const resolvers = {
     },
     // sets nextStep for response
     addNextStep: async (parent, args, context) => {
-      const response = await Response.findOneAndUpdate(
+      const response = await Response.findByIdAndUpdate(
         args._id,
         {
           nextStep: args.nextStep,
@@ -127,9 +132,9 @@ const resolvers = {
       return response;
     },
     // deletes response
-    deleteResponse: async (parent, {_id}, context) => {
-      const response = await Response.findOneAndDelete(_id, {new: true});
-      return response
+    deleteResponse: async (parent, { _id }, context) => {
+      const response = await Response.findByIdAndDelete(_id, { new: true });
+      return response;
     },
   },
 };
