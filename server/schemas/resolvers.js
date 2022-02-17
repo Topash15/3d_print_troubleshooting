@@ -48,6 +48,11 @@ const resolvers = {
       const problem = await Problem.findByIdAndUpdate(
         args._id,
         {
+          name: args.name,
+          description: args.description,
+          links: args.link,
+          photos: args.photos,
+          firstStep: args.firstStep,
           $addToSet: { steps: args.steps }
         },
         { new: true }

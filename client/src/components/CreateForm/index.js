@@ -112,12 +112,14 @@ function EntryForm() {
         },
       });
       const stepId = mutationResponse.data.addStep._id;
-      console.log(stepId)
-      console.log(stepForm.problem)
+      console.log(stepId);
+      console.log(stepForm.problem);
       const problemMutationResponse = await editProblem({
-        id: stepForm.problem,
-        steps: stepId,
-      })
+        variables: {
+          id: stepForm.problem,
+          steps: stepId,
+        },
+      });
       console.log(problemMutationResponse);
     }
   }
