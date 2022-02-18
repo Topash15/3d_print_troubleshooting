@@ -112,6 +112,7 @@ function EntryForm() {
   const [editProblem] = useMutation(EDIT_PROBLEM);
 
   async function submitStepHandler(e) {
+    e.preventDefault();
     const valid = await validateStep(stepForm);
 
     if (!valid) {
@@ -134,7 +135,9 @@ function EntryForm() {
           steps: stepId,
         },
       });
+      window.location.reload();
     }
+
   }
 
   const handleStepChange = (e) => {
@@ -195,6 +198,7 @@ function EntryForm() {
   const [addResponseToStep] = useMutation(ADD_RESPONSE_TO_STEP);
 
   async function submitResponseHandler(e) {
+    e.preventDefault();
     const valid = await validateResponse(responseForm);
 
     if (!valid) {
@@ -215,6 +219,7 @@ function EntryForm() {
         },
       });
     }
+    window.location.reload();
   }
 
   const handleResponseChange = (e) => {

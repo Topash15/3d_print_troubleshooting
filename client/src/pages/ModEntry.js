@@ -10,8 +10,8 @@ function CreateEntry() {
   return (
     <div>
       <Nav />
-      {/* <OptionForm /> */}
-      {/* <CreateForm /> */}
+      <OptionForm />
+      <CreateForm />
       <EditForm />
       <Footer />
     </div>

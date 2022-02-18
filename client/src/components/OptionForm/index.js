@@ -29,8 +29,7 @@ function EntryForm() {
             Choose an action
           </option>
           <option value="create">Create</option>
-          <option value="edit">Edit</option>
-          <option value="delete">Delete</option>
+          <option value="modify">Modify</option>
         </select>
         <select name="component" defaultValue="" onChange={handleChange}>
           <option value="" disabled hidden>

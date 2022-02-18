@@ -7,7 +7,8 @@ import { Routes, Route} from 'react-router-dom';
 // Pages
 import Home from "./pages/Home";
 import Step from "./pages/Step";
-import CreateEntry from "./pages/CreateEntry";
+import ModEntry from "./pages/ModEntry";
+import ManageProblem from "./pages/ManageProblem";
 import Error404 from "./pages/Error404";
 
 const httpLink = createHttpLink({
@@ -37,7 +38,8 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />}></Route>
             <Route path='step/:id' element={<Step />}></Route>
-            <Route path='/create-entry' element={<CreateEntry />}></Route>
+            <Route path='/mod-entry' element={<ModEntry />}></Route>
+            <Route path='/edit-problems/:id' element={<ManageProblem />}></Route>
             <Route path='/404' element={<Error404 />}></Route>
             {/* <Route path='/feedback' element={<Feedback />}></Route> */}
             {/* <Route path='/contact' element={<Contact />}></Route> */}

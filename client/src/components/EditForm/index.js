@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import { useGlobalContext } from "../../utils/GlobalState";
-import { QUERY_ALL_PROBLEMS, QUERY_ALL_STEPS } from "../../utils/queries";
+import { QUERY_ALL_PROBLEMS } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 import { UPDATE_PROBLEMS } from "../../utils/actions";
+import {useNavigate} from 'react-router-dom'
+
 
 function EditForm() {
   // calls global state
@@ -26,25 +28,15 @@ function EditForm() {
     }
   }, [problemData, loading, dispatch]);
 
-  const [selectedProblem, setSelectedProblem] = useState({ problemId: "" });
+  // used to select step from main page
+  const navigate = useNavigate();
   const selectProblem = (e) => {
     const { id } = e.target;
-    setSelectedProblem({ problemId: id });
+    navigate(`/edit-problems/${id}`);
   };
-
-  const {
-    loading: stepsLoading,
-    error: stepsError,
-    data: stepsData,
-  } = useQuery(QUERY_ALL_STEPS, {
-    variables: selectedProblem.problemId,
-  });
-
-  console.log(stepsData);
 
   return (
     <div>
-      {!selectedProblem.problemId ? (
         <div>
           <h1>Select a problem to edit</h1>
           <p>
@@ -103,61 +95,6 @@ function EditForm() {
             ) : null}
           </div>
         </div>
-      ) : (
-        <div>
-          {stepsData ? (
-            <div>
-              <div className="problem-container">
-                <h1>Problem</h1>
-                <h3>Problem name :{stepsData.steps[0].category.name}</h3>
-                <h3>
-                  Problem Description :{stepsData.steps[0].category.description}
-                </h3>
-                {stepsData.steps[0].category.link ? (
-                  <a
-                    href={stepsData.steps[0].category.link}
-                  />
-                ) : (
-                  <h3>No Link</h3>
-                )}
-                {stepsData.steps[0].category.photos ? (
-                  <img
-                    src={stepsData.steps[0].category.photos}
-                    alt={stepsData.steps[0].category.name}
-                  />
-                ) : (
-                  <h3>No photos</h3>
-                )}
-                {stepsData.steps[0].category.firstStep ? (
-                  <h3>{stepsData.steps[0].category.firstStep.step}</h3>
-                ):(
-                  <h3>No first step specified. Please select a first step.</h3>
-                )}
-              </div>
-              <div className="step-card-container">
-              <h2>Steps</h2>
-              {stepsData.steps.map((step) => (
-                <div key={step._id} className="step-card">
-                  <h2>{step.step}</h2>
-                  <p>{step.description}</p>
-                  <h2>Responses</h2>
-                  {step.responses.map((response) => (
-                    <div key={response._id}>
-                      <h3>{response.text}</h3>
-                      {response.photo ? (
-                        <img src={response.photo} alt={response.text} />
-                      ) : (
-                        <p>No photo</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ))}
-              </div>
-            </div>
-          ) : null}
-        </div>
-      )}
     </div>
   );
 }
