@@ -61,6 +61,34 @@ export const QUERY_STEP = gql`
   }
 `;
 
+export const QUERY_ALL_STEPS = gql`
+  query Responses($category: String) {
+    steps(category: $category) {
+      _id
+      step
+      description
+      category {
+        _id
+        name
+        description
+        links
+        photos
+        firstStep {
+          _id
+        }
+      }
+      responses {
+        _id
+        text
+        photo
+        nextStep {
+          _id
+        }
+      }
+    }
+  }
+`;
+
 export const QUERY_RESPONSE = gql`
   query getResponse($id: ID!) {
     response(_id: $id) {

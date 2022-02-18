@@ -18,7 +18,16 @@ const resolvers = {
     },
     // get all steps
     steps: async (parent, args, context) => {
-      return Step.find().populate("responses").populate("category");
+      const { category } = args;
+
+      // if category is not specified, return all steps
+      if (!category) {
+        return Step.find().populate("responses").populate("category");
+      }
+
+      // find all steps with matching category
+      const steps = Step.find({ category: category}).populate("responses").populate('category')
+      return steps
     },
     // get single step
     step: async (parent, { _id }, context) => {
@@ -53,10 +62,10 @@ const resolvers = {
           links: args.link,
           photos: args.photos,
           firstStep: args.firstStep,
-          $addToSet: { steps: args.steps }
+          $addToSet: { steps: args.steps },
         },
         { new: true }
-      ).populate('steps');
+      ).populate("steps");
       return problem;
     },
     // deletes existing problem

@@ -31,7 +31,7 @@ const typeDefs = gql`
     problem(_id: ID!): Problem
     responses: [Response]
     response(_id: ID!): Response
-    steps: [Step]
+    steps(category: String): [Step]
     step(_id: ID!): Step
   }
 
