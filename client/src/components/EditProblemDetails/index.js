@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ALL_STEPS } from "../../utils/queries";
 import { useGlobalContext } from "../../utils/GlobalState";
+import CreateStepForm from '../CreateStepForm'
 
 function EditProblemDetails() {
   // call globalstate
@@ -19,7 +20,6 @@ function EditProblemDetails() {
   } = useQuery(QUERY_ALL_STEPS, {
     variables: { category: id },
   });
-  console.log(stepsData);
 
   const [editForm, setEditForm] = useState({ firstStep: "", nextStep: "" });
 
@@ -48,7 +48,11 @@ function EditProblemDetails() {
 
   return (
     <div>
-      {stepsData ? (
+      {!stepsData || !stepsData.steps.length ? (
+      <div>
+        <h3>This problem has no steps. Please create a step.</h3>
+        <CreateStepForm/>
+        </div>):(
         <div>
           <div className="problem-card">
             <h1>Problem</h1>
@@ -118,7 +122,7 @@ function EditProblemDetails() {
             ))}
           </div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 }

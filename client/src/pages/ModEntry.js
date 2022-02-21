@@ -3,15 +3,15 @@ import React from "react";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import OptionForm from "../components/OptionForm";
-import CreateForm from "../components/CreateForm";
+import CreateStepForm from "../components/CreateStepForm";
 import EditForm from "../components/EditForm";
 
 function CreateEntry() {
   return (
     <div>
       <Nav />
-      <OptionForm />
-      <CreateForm />
+      {/* <OptionForm /> */}
+      <CreateStepForm />
       <EditForm />
       <Footer />
     </div>
