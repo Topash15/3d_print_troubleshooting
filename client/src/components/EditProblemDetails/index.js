@@ -19,6 +19,13 @@ function EditStepDetails() {
   console.log(state);
   const { id } = useParams();
 
+  // // allows refreshing component
+  // // NOT CURRENTLY IN USE
+  // const [refresh, setRefresh] = useState({})
+  // const handleRefresh = () => {
+  //   setRefresh({});
+  // }
+
   const {
     loading,
     error,
@@ -37,6 +44,7 @@ function EditStepDetails() {
     });
   };
 
+  // used to submit the first step if none are specified
   const [editProblem] = useMutation(EDIT_PROBLEM);
   const submitFirstStep = async (e) => {
     e.preventDefault();
@@ -46,9 +54,18 @@ function EditStepDetails() {
         firstStep: editForm.firstStep,
       },
     });
-    console.log(mutationResponse);
+  };
+  const editProblemBtn = async (e) => {};
+  const [deleteProblem] = useMutation(DELETE_PROBLEM);
+  const deleteProblemBtn = async (e) => {
+    const mutationResponse = await deleteProblem({
+      variables: { id: id },
+    });
+    window.location.assign("/mod-entry/");
   };
 
+  // used to delete step
+  // will also delete firstStep from problem if deleted step is the first step
   const [deleteStep] = useMutation(DELETE_STEP);
   const deleteStepBtn = async (e) => {
     const stepId = e.target.parentElement.id;
@@ -69,6 +86,7 @@ function EditStepDetails() {
     window.location.reload();
   };
 
+  // used to open edit step
   const editStepBtn = async (e) => {
     const { id } = e.target.parentElement;
     const mutationResponse = await deleteStep({
@@ -78,8 +96,8 @@ function EditStepDetails() {
     });
   };
 
+  // used to determine if step create form should open
   const [stepIsOpen, setStepIsOpen] = useState({ createStep: false });
-
   const createStep = (e) => {
     setStepIsOpen({
       createStep: true,
@@ -96,17 +114,12 @@ function EditStepDetails() {
     }
   };
 
-  console.log(stepsData);
-
-  //   PAGE WILL NOT LOAD IF PROBLEM DOES NOT HAVE ANY STEPS
-  //   REDIRECT TO CREATE PAGE?
-
   return (
     <div>
       {!stepsData || !stepsData.steps.length || stepIsOpen.createStep ? (
         <div>
           {!stepIsOpen.createStep ? (
-            <h3>This step has no steps. Please create a step.</h3>
+            <h3>This problem has no steps. Please create a step.</h3>
           ) : (
             <h3>Create a Step</h3>
           )}
@@ -135,8 +148,14 @@ function EditStepDetails() {
             )}
             {stepsData.steps[0].category.firstStep ? (
               <div>
-              <h2>First Step</h2>
-              <h3>{findFirstStep().step}</h3>
+                <button className="edit-btn" onClick={editProblemBtn}>
+                  EDIT
+                </button>
+                <button className="delete-btn" onClick={deleteProblemBtn}>
+                  DELETE
+                </button>
+                <h2>First Step</h2>
+                <h3>{findFirstStep().step}</h3>
               </div>
             ) : (
               <form onSubmit={submitFirstStep}>

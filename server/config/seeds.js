@@ -34,6 +34,7 @@ db.once("open", async () => {
 
   const problem1 = await Problem.findByIdAndUpdate(problems[0]._id, {
     firstStep: step1._id,
+    steps: [step1._id]
   });
 
   const responses1 = await Response.create(
@@ -58,6 +59,7 @@ db.once("open", async () => {
 
   const problem2 = await Problem.findByIdAndUpdate(problems[1]._id, {
     firstStep: step2._id,
+    steps: [step2._id]
   });
 
   const responses2 = await Response.create(
