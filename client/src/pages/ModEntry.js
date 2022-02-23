@@ -4,7 +4,7 @@ import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import OptionForm from "../components/OptionForm";
 import CreateStepForm from "../components/CreateStepForm";
-import EditForm from "../components/EditForm";
+import EditSelectionForm from "../components/EditSelectionForm";
 
 function CreateEntry() {
   return (
@@ -12,7 +12,7 @@ function CreateEntry() {
       <Nav />
       {/* <OptionForm /> */}
       <CreateStepForm />
-      <EditForm />
+      <EditSelectionForm />
       <Footer />
     </div>
   );

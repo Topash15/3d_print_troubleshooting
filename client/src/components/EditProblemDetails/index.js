@@ -43,6 +43,16 @@ function EditProblemDetails() {
     console.log(mutationResponse);
   };
 
+  const deleteStep = async (e) => {
+    e.preventDefault();
+    const {id} = e.target
+    const mutationResponse = await deleteStep({
+      variables: {
+        id: id
+      }
+    })
+  }
+
   //   PAGE WILL NOT LOAD IF PROBLEM DOES NOT HAVE ANY STEPS
   //   REDIRECT TO CREATE PAGE?
 
@@ -103,6 +113,7 @@ function EditProblemDetails() {
               <div key={step._id} className="step-card">
                 <h2>{step.step}</h2>
                 <p>{step.description}</p>
+                <button className="delete-btn" id={step._id} onClick={deleteStep}>DELETE</button>
                 <h2>Responses</h2>
                 {step.responses ? (
                   step.responses.map((response) => (

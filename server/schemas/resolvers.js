@@ -26,8 +26,10 @@ const resolvers = {
       }
 
       // find all steps with matching category
-      const steps = Step.find({ category: category}).populate("responses").populate('category')
-      return steps
+      const steps = Step.find({ category: category })
+        .populate("responses")
+        .populate("category");
+      return steps;
     },
     // get single step
     step: async (parent, { _id }, context) => {
@@ -125,8 +127,10 @@ const resolvers = {
       return step;
     },
     // deletes step
-    deleteStep: async (parent, { _id }, context) => {
-      const step = await Step.findByIdAndDelete(_id, { new: true });
+    deleteStep: async (parent, args, context) => {
+      const step = await Step.deleteMany({_id: {
+        $all: [args._id]
+      }}, { new: true });
       return step;
     },
     // creates new response

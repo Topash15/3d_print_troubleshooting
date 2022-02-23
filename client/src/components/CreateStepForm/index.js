@@ -43,10 +43,9 @@ function EntryForm() {
     link: "",
     photo: "",
     problem: id,
+    responseText: "",
     errors: [],
   });
-
-
 
   // creates function for adding step to database
   const [createStep] = useMutation(CREATE_STEP);
@@ -76,6 +75,18 @@ function EntryForm() {
           steps: stepId,
         },
       });
+      const ResponseMutationResponse = await createResponse({
+        variables: {
+          text: stepForm.responseText,
+        },
+      });
+      const responseId = ResponseMutationResponse.data.addResponse._id;
+      const stepMutationResponse = await addResponseToStep({
+        variables: {
+          id: stepId,
+          responses: responseId,
+        },
+      });
       window.location.reload();
     }
   }
@@ -90,7 +101,7 @@ function EntryForm() {
   };
 
   const validateStep = async (stepForm) => {
-    const { name, description, problem } = stepForm;
+    const { name, description, problem, responseText } = stepForm;
     const errors = [];
 
     if (!name) {
@@ -108,6 +119,12 @@ function EntryForm() {
         message: "Valid problem is required",
       });
     }
+    if (!responseText){
+      errors.push({
+        type: "responseText",
+        message: "Invalid response text."
+      })
+    }
 
     setStepForm({
       ...stepForm,
@@ -122,86 +139,13 @@ function EntryForm() {
   };
 
   // RESPONSE CREATE FUNCTIONS
-  // creates state for response form
-  const [responseForm, setResponseForm] = useState({
-    text: "",
-    photo: "",
-    step: "",
-    nextStep: "",
-    problem: "",
-    steps: [],
-    errors: [],
-  });
 
   // creates function for adding response to database
   const [createResponse] = useMutation(CREATE_RESPONSE);
   const [addResponseToStep] = useMutation(ADD_RESPONSE_TO_STEP);
 
-  async function submitResponseHandler(e) {
-    e.preventDefault();
-    const valid = await validateResponse(responseForm);
-
-    if (!valid) {
-      console.log(responseForm.errors);
-      return;
-    } else {
-      const mutationResponse = await createResponse({
-        variables: {
-          text: responseForm.text,
-          photo: responseForm.photo,
-        },
-      });
-      const responseId = mutationResponse.data.addResponse._id;
-      const stepMutationResponse = await addResponseToStep({
-        variables: {
-          id: responseForm.step,
-          responses: responseId,
-        },
-      });
-    }
-    window.location.reload();
-  }
-
-  const handleResponseChange = (e) => {
-    const { name, value } = e.target;
-    setResponseForm({
-      ...responseForm,
-      [name]: value,
-    });
-    console.log(responseForm);
-  };
-
-  const filterSteps = () => {
-    if (responseForm.problem) {
-      let chosenProblem = state.problems.filter(
-        (problem) => problem._id === responseForm.problem
-      );
-      return chosenProblem[0].steps;
-    }
-  };
-
-  const validateResponse = async (responseForm) => {
-    const { text } = responseForm;
-    const errors = [];
-
-    if (!text) {
-      errors.push({ type: "text", message: "Valid text is required" });
-    }
-
-    setResponseForm({
-      ...responseForm,
-      errors,
-    });
-
-    if (errors.length > 0) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
   return (
-    <section>
+    <section className="step-form hidden">
       <form className="form createStep" onSubmit={submitStepHandler}>
         <h1>Step</h1>
         {!id && problemData ? (
@@ -229,50 +173,17 @@ function EntryForm() {
         <input name="photo" type="text" onChange={handleStepChange}></input>
         <label>Useful URL</label>
         <input name="link" type="text" onChange={handleStepChange}></input>
-        <button type="submit"> Submit </button>
-      </form>
-      <div>{responseForm.problem}</div>
-      <form className="form createResponse" onSubmit={submitResponseHandler}>
         <h1>Response</h1>
-        <label>
-          First you must select which problem and step the response is for
-        </label>
-        {problemData ? (
-          <select name="problem" onChange={handleResponseChange}>
-            <option value="">Choose a problem</option>
-            {problemData.problems.map((problem) => (
-              <option key={problem._id} value={problem._id}>
-                {problem.name}
-              </option>
-            ))}
-          </select>
-        ) : null}
-        {responseForm.problem ? (
-          <select name="step" defaultValue="" onChange={handleResponseChange}>
-            <option value="">Choose a step</option>
-            {filterSteps().map((step) => (
-              <option
-                key={step._id}
-                value={step._id}
-                onChange={handleResponseChange}
-              >
-                {step.step}
-              </option>
-            ))}
-          </select>
-        ) : null}
-        <label>Name</label>
-        <input type="text" name="text" onChange={handleResponseChange}></input>
-        <label>Description</label>
-        <textarea
-          name="description"
-          type="text"
-          onChange={handleResponseChange}
-        ></textarea>
-        <label>Photo Direct Link</label>
-        <input type="text" name="photo" onChange={handleResponseChange}></input>
-        <label>Useful URL</label>
-        <input type="text" name="link" onChange={handleResponseChange}></input>
+        <p>
+          Note that the{" "}
+          <i>
+            <b>Solved</b>
+          </i>{" "}
+          response is added to each step by default. Only add responses for when
+          the step was not successful in solving problem.
+        </p>
+        <label>Option Text</label>
+        <input type="text" name="responseText" onChange={handleStepChange}></input>
         <label>Add another Response?</label>
         {/* if checked, add second response form */}
         <input type="checkbox"></input>

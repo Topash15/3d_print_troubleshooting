@@ -9,6 +9,7 @@
 .problem-card{
     display: flex;
     flex-direction: column;
+    justify-content:space-around;
     align-items: center;
     border: 1px solid var(--secondary);
     border-radius: 0.5em;
@@ -32,6 +33,7 @@
 .step-card{
     display: flex;
     flex-direction: column;
+    justify-content:space-around;
     align-items: center;
     border: 1px solid var(--secondary);
     border-radius: 0.5em;
