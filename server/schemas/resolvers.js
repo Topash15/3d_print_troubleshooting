@@ -130,7 +130,7 @@ const resolvers = {
     deleteStep: async (parent, args, context) => {
       const step = await Step.deleteMany({_id: {
         $all: [args._id]
-      }}, { new: true });
+      }});
       return step;
     },
     // creates new response

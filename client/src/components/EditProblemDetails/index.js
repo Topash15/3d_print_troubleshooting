@@ -1,4 +1,9 @@
-import { EDIT_PROBLEM } from "../../utils/mutations";
+import {
+  EDIT_PROBLEM,
+  DELETE_PROBLEM,
+  DELETE_STEP,
+  DELETE_RESPONSE,
+} from "../../utils/mutations";
 import React, { useState } from "react";
 import "./style.css";
 import { useParams } from "react-router-dom";
@@ -32,10 +37,10 @@ function EditStepDetails() {
     });
   };
 
-  const [editStep] = useMutation(EDIT_PROBLEM);
+  const [editProblem] = useMutation(EDIT_PROBLEM);
   const submitFirstStep = async (e) => {
     e.preventDefault();
-    const mutationResponse = await editStep({
+    const mutationResponse = await editProblem({
       variables: {
         id: id,
         firstStep: editForm.firstStep,
@@ -44,9 +49,28 @@ function EditStepDetails() {
     console.log(mutationResponse);
   };
 
-  const deleteStep = async (e) => {
-    e.preventDefault();
-    const { id } = e.target;
+  const [deleteStep] = useMutation(DELETE_STEP);
+  const deleteStepBtn = async (e) => {
+    const stepId = e.target.parentElement.id;
+    const mutationResponse = await deleteStep({
+      variables: {
+        id: stepId,
+      },
+    });
+    // changes problems first step to null if step being deleted is the first step
+    if (stepId === stepsData.steps[0].category.firstStep._id) {
+      const problemMutationResponse = await editProblem({
+        variables: {
+          id: id,
+          firstStep: null,
+        },
+      });
+    }
+    window.location.reload();
+  };
+
+  const editStepBtn = async (e) => {
+    const { id } = e.target.parentElement;
     const mutationResponse = await deleteStep({
       variables: {
         id: id,
@@ -62,6 +86,17 @@ function EditStepDetails() {
     });
     console.log(stepIsOpen);
   };
+
+  // used to match first step id with step object from stepsData.steps array
+  const findFirstStep = () => {
+    if (stepsData.steps[0].category.firstStep._id) {
+      return stepsData.steps.find(
+        (step) => step._id === stepsData.steps[0].category.firstStep._id
+      );
+    }
+  };
+
+  console.log(stepsData);
 
   //   PAGE WILL NOT LOAD IF PROBLEM DOES NOT HAVE ANY STEPS
   //   REDIRECT TO CREATE PAGE?
@@ -79,10 +114,12 @@ function EditStepDetails() {
         </div>
       ) : (
         <div>
-          <div className="step-card">
-            <h1>Step</h1>
-            <h3>Step name :{stepsData.steps[0].category.name}</h3>
-            <h3>Step Description :{stepsData.steps[0].category.description}</h3>
+          <div className="problem-card">
+            <h1>Problem</h1>
+            <h3>Problem name :{stepsData.steps[0].category.name}</h3>
+            <h3>
+              Problem Description :{stepsData.steps[0].category.description}
+            </h3>
             {stepsData.steps[0].category.link ? (
               <a href={stepsData.steps[0].category.link} />
             ) : (
@@ -94,10 +131,13 @@ function EditStepDetails() {
                 alt={stepsData.steps[0].category.name}
               />
             ) : (
-              <h3>No photos</h3>
+              <h3>No photo</h3>
             )}
             {stepsData.steps[0].category.firstStep ? (
-              <h3>{stepsData.steps[0].category.firstStep.step}</h3>
+              <div>
+              <h2>First Step</h2>
+              <h3>{findFirstStep().step}</h3>
+              </div>
             ) : (
               <form onSubmit={submitFirstStep}>
                 <h3>
@@ -130,13 +170,14 @@ function EditStepDetails() {
               <div key={step._id} className="step-card">
                 <h2>{step.step}</h2>
                 <p>{step.description}</p>
-                <button
-                  className="delete-btn"
-                  id={step._id}
-                  onClick={deleteStep}
-                >
-                  DELETE
-                </button>
+                <div id={step._id}>
+                  <button className="edit-btn" onClick={editStepBtn}>
+                    EDIT
+                  </button>
+                  <button className="delete-btn" onClick={deleteStepBtn}>
+                    DELETE
+                  </button>
+                </div>
                 <h2>Responses</h2>
                 {step.responses ? (
                   step.responses.map((response) => (
@@ -147,7 +188,11 @@ function EditStepDetails() {
                       ) : (
                         <p>No photo</p>
                       )}
-                      {response.nextStep ? (<h3>{response.nextStep.step}</h3>):(<h3>NO NEXT STEP SET</h3>)}
+                      {response.nextStep ? (
+                        <h3>{response.nextStep.step}</h3>
+                      ) : (
+                        <h3>NO NEXT STEP SET</h3>
+                      )}
                       {step.responses.length > 1 ? (
                         <button
                           className="delete-btn"

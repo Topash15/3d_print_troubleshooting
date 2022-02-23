@@ -111,3 +111,27 @@ export const ADD_RESPONSE_TO_STEP = gql`
     }
   }
 `;
+
+export const DELETE_STEP = gql`
+  mutation Mutation($id: ID!) {
+    deleteStep(_id: $id) {
+      _id
+    }
+  }
+`;
+
+export const DELETE_PROBLEM = gql`
+  mutation Mutation($id: ID!) {
+    deleteProblem(_id: $id) {
+      _id
+    }
+  }
+`;
+
+export const DELETE_RESPONSE = gql`
+  mutation Mutation($id: ID!) {
+    deleteResponse(_id: $id) {
+      _id
+    }
+  }
+`;
