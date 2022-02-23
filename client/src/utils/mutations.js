@@ -82,11 +82,9 @@ export const EDIT_PROBLEM = gql`
       photos
       firstStep {
         _id
-        step
       }
       steps {
         _id
-        step
       }
     }
   }

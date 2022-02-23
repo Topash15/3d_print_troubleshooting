@@ -5,9 +5,10 @@ import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ALL_STEPS } from "../../utils/queries";
 import { useGlobalContext } from "../../utils/GlobalState";
-import CreateStepForm from '../CreateStepForm'
+import CreateStepForm from "../CreateStepForm";
+import plus from "../../assets/plus.svg";
 
-function EditProblemDetails() {
+function EditStepDetails() {
   // call globalstate
   const [state, dispatch] = useGlobalContext();
   console.log(state);
@@ -31,10 +32,10 @@ function EditProblemDetails() {
     });
   };
 
-  const [editProblem] = useMutation(EDIT_PROBLEM);
+  const [editStep] = useMutation(EDIT_PROBLEM);
   const submitFirstStep = async (e) => {
     e.preventDefault();
-    const mutationResponse = await editProblem({
+    const mutationResponse = await editStep({
       variables: {
         id: id,
         firstStep: editForm.firstStep,
@@ -45,31 +46,43 @@ function EditProblemDetails() {
 
   const deleteStep = async (e) => {
     e.preventDefault();
-    const {id} = e.target
+    const { id } = e.target;
     const mutationResponse = await deleteStep({
       variables: {
-        id: id
-      }
-    })
-  }
+        id: id,
+      },
+    });
+  };
+
+  const [stepIsOpen, setStepIsOpen] = useState({ createStep: false });
+
+  const createStep = (e) => {
+    setStepIsOpen({
+      createStep: true,
+    });
+    console.log(stepIsOpen);
+  };
 
   //   PAGE WILL NOT LOAD IF PROBLEM DOES NOT HAVE ANY STEPS
   //   REDIRECT TO CREATE PAGE?
 
   return (
     <div>
-      {!stepsData || !stepsData.steps.length ? (
-      <div>
-        <h3>This problem has no steps. Please create a step.</h3>
-        <CreateStepForm/>
-        </div>):(
+      {!stepsData || !stepsData.steps.length || stepIsOpen.createStep ? (
         <div>
-          <div className="problem-card">
-            <h1>Problem</h1>
-            <h3>Problem name :{stepsData.steps[0].category.name}</h3>
-            <h3>
-              Problem Description :{stepsData.steps[0].category.description}
-            </h3>
+          {!stepIsOpen.createStep ? (
+            <h3>This step has no steps. Please create a step.</h3>
+          ) : (
+            <h3>Create a Step</h3>
+          )}
+          <CreateStepForm />
+        </div>
+      ) : (
+        <div>
+          <div className="step-card">
+            <h1>Step</h1>
+            <h3>Step name :{stepsData.steps[0].category.name}</h3>
+            <h3>Step Description :{stepsData.steps[0].category.description}</h3>
             {stepsData.steps[0].category.link ? (
               <a href={stepsData.steps[0].category.link} />
             ) : (
@@ -109,11 +122,21 @@ function EditProblemDetails() {
           </div>
           <h2>Steps</h2>
           <div className="step-card-container">
+            <div className="step-card" id="add-step" onClick={createStep}>
+              <h2 className="step-card-title">Add a step</h2>
+              <img className="step-card-image" src={plus} alt="add Step" />
+            </div>
             {stepsData.steps.map((step) => (
               <div key={step._id} className="step-card">
                 <h2>{step.step}</h2>
                 <p>{step.description}</p>
-                <button className="delete-btn" id={step._id} onClick={deleteStep}>DELETE</button>
+                <button
+                  className="delete-btn"
+                  id={step._id}
+                  onClick={deleteStep}
+                >
+                  DELETE
+                </button>
                 <h2>Responses</h2>
                 {step.responses ? (
                   step.responses.map((response) => (
@@ -123,6 +146,25 @@ function EditProblemDetails() {
                         <img src={response.photo} alt={response.text} />
                       ) : (
                         <p>No photo</p>
+                      )}
+                      {response.nextStep ? (<h3>{response.nextStep.step}</h3>):(<h3>NO NEXT STEP SET</h3>)}
+                      {step.responses.length > 1 ? (
+                        <button
+                          className="delete-btn"
+                          id={response._id}
+                          // onClick={deleteResponse}
+                          disabled
+                        >
+                          DELETE
+                        </button>
+                      ) : (
+                        <div>
+                          <p>
+                            Must have more than one response in a step before
+                            you can delete a response.
+                          </p>
+                          <button disabled>DELETE</button>
+                        </div>
                       )}
                     </div>
                   ))
@@ -138,4 +180,4 @@ function EditProblemDetails() {
   );
 }
 
-export default EditProblemDetails;
+export default EditStepDetails;

@@ -41,6 +41,9 @@ function StepDetails() {
         <div key={data._id}>
           <h1>{data.step.step}</h1>
           <h2>{data.step.description}</h2>
+          <div>
+            <button>Solved!</button>
+          </div>
           {data.step.responses.map((response) => (
             <div key={response._id}>
               {response.photo ? (

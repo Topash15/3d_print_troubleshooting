@@ -38,13 +38,11 @@ function EditForm() {
   };
 
   const [problemIsOpen, setProblemIsOpen] = useState({createProblem: false});
-  console.log(problemIsOpen)
 
   const createProblem = (e) => {
     setProblemIsOpen({
       createProblem: true
     })
-    console.log(problemIsOpen)
   }
 
   return (
@@ -94,9 +92,9 @@ function EditForm() {
                         <h4 className="first-step-title">
                           {problem.firstStep.step}
                         </h4>
-                        <p className="first-step-description">
+                        {/* <p className="first-step-description">
                           {problem.firstStep.description}
-                        </p>
+                        </p> */}
                       </div>
                     ) : (
                       <div className="first-step-div">

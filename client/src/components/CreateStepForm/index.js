@@ -44,6 +44,7 @@ function EntryForm() {
     photo: "",
     problem: id,
     responseText: "",
+    responsePhoto: "",
     errors: [],
   });
 
@@ -182,8 +183,10 @@ function EntryForm() {
           response is added to each step by default. Only add responses for when
           the step was not successful in solving problem.
         </p>
-        <label>Option Text</label>
+        <label>Response Text</label>
         <input type="text" name="responseText" onChange={handleStepChange}></input>
+        <label>Response Photo Link</label>
+        <input type="text" name="responsePhoto" onChange={handleStepChange}></input>
         <label>Add another Response?</label>
         {/* if checked, add second response form */}
         <input type="checkbox"></input>
