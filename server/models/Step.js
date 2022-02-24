@@ -13,15 +13,20 @@ const stepSchema = new Schema({
     require: false,
     trim: true,
   },
-  category: 
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Problem",
-    },
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: "Problem",
+  },
   responses: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Response"
+      ref: "Response",
+    },
+  ],
+  linkedResponses: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Response",
     },
   ],
 });

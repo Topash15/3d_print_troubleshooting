@@ -22,20 +22,25 @@ const resolvers = {
 
       // if category is not specified, return all steps
       if (!category) {
-        return Step.find().populate("responses").populate("category");
+        return Step.find()
+          .populate("responses")
+          .populate("category")
+          .populate("linkedResponses");
       }
 
       // find all steps with matching category
       const steps = Step.find({ category: category })
         .populate("responses")
-        .populate("category");
+        .populate("category")
+        .populate("linkedResponses");
       return steps;
     },
     // get single step
     step: async (parent, { _id }, context) => {
       const step = Step.findById(_id)
         .populate("responses")
-        .populate("category");
+        .populate("category")
+        .populate('linkedResponses');
       return step;
     },
     // get all responses
@@ -90,7 +95,8 @@ const resolvers = {
         { new: true }
       )
         .populate("category")
-        .populate("responses");
+        .populate("responses")
+        .populate('linkedResponses');
       return step;
     },
     // sets category for step
@@ -124,6 +130,28 @@ const resolvers = {
         },
         { new: true }
       ).populate("responses");
+      return step;
+    },
+    // adds linked response to step
+    addLinkedResponsesStep: async (parent, args, context) => {
+      const step = await Step.findByIdAndUpdate(
+        args._id,
+        {
+          $addToSet: { linkedResponses: args.linkedResponses },
+        },
+        { new: true }
+      ).populate("linkedResponses");
+      return step;
+    },
+    // deletes linked response from step
+    removeLinkedResponsesStep: async (parent, args, context) => {
+      const step = await Step.findByIdAndUpdate(
+        args._id,
+        {
+          $pull: { linkedResponses: args.linkedResponses },
+        },
+        { new: true }
+      ).populate("linkedResponses");
       return step;
     },
     // deletes step

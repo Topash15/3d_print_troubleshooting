@@ -24,6 +24,7 @@ const typeDefs = gql`
     description: String
     category: Problem
     responses: [Response]
+    linkedResponses: [Response]
   }
 
   type Query {
@@ -69,6 +70,8 @@ const typeDefs = gql`
     addCategoryStep(_id: ID!, category: String!): Step
     addResponsesStep(_id: ID!, responses: String!): Step
     removeResponsesStep(_id: ID!, responses: String!): Step
+    addLinkedResponsesStep(_id: ID!, linkedResponses: String!): Step
+    removeLinkedResponsesStep(_id: ID!, linkedResponses: String!): Step
     deleteStep(_id: ID!): Step
 
     

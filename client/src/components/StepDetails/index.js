@@ -48,13 +48,17 @@ function StepDetails() {
               {response.photo ? (
                 <img src={response.photo} alt={response.text}></img>
               ) : null}
-              <button
-                id={response.nextStep}
-                onClick={()=>{loadNextStep(response.nextStep)}}
-                href={"/step/" + response.nextStep}
+              {response.nextStep ? (<button
+                id={response.nextStep._id}
+                onClick={()=>{loadNextStep(response.nextStep._id)}}
+                href={"/step/" + response.nextStep._id}
               >
                 {response.text}
-              </button>
+              </button>): <button
+                disabled
+              ><p>This option does not have a next step</p>
+                {response.text}
+              </button> }
             </div>
           ))}
         </div>

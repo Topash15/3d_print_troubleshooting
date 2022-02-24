@@ -85,6 +85,11 @@ export const QUERY_ALL_STEPS = gql`
           _id
         }
       }
+      linkedResponses {
+        _id
+        text
+        photo
+      }
     }
   }
 `;

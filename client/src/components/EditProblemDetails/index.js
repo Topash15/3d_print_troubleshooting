@@ -5,6 +5,7 @@ import {
   EDIT_RESPONSE,
   DELETE_RESPONSE,
   REMOVE_RESPONSE_FROM_STEP,
+  ADD_LINKED_RESPONSE_TO_STEP
 } from "../../utils/mutations";
 import React, { useState, useEffect } from "react";
 import "./style.css";
@@ -22,10 +23,9 @@ import CreateResponseForm from "../CreateResponseForm";
 function EditStepDetails() {
   // call globalstate
   const [state, dispatch] = useGlobalContext();
-  console.log(state);
-  const { id } = useParams();
 
-  const navigate = useNavigate();
+  // pull Problem ID from params
+  const { id } = useParams();
 
   // // allows refreshing component
   // // NOT CURRENTLY IN USE
@@ -99,11 +99,6 @@ function EditStepDetails() {
   // used to open edit step
   const editStepBtn = async (e) => {
     const { id } = e.target.parentElement;
-    const mutationResponse = await deleteStep({
-      variables: {
-        id: id,
-      },
-    });
   };
 
   // used to determine if step create form should open
@@ -115,13 +110,9 @@ function EditStepDetails() {
     console.log(stepIsOpen);
   };
 
-  // used to match first step id with step object from stepsData.steps array
-  const findFirstStep = () => {
-    if (stepsData.steps[0].category.firstStep._id) {
-      return stepsData.steps.find(
-        (step) => step._id === stepsData.steps[0].category.firstStep._id
-      );
-    }
+  // matches id to individual step
+  const findStep = (id) => {
+    return stepsData.steps.find((step) => step._id === id);
   };
 
   // returns all but one step
@@ -146,8 +137,9 @@ function EditStepDetails() {
     });
   };
 
-
-  const [editResponse] = useMutation(EDIT_RESPONSE);  
+  // used to set nextStep for response
+  const [addLinkedResponseStep] = useMutation(ADD_LINKED_RESPONSE_TO_STEP)
+  const [editResponse] = useMutation(EDIT_RESPONSE);
   const submitNextStep = async (e) => {
     e.preventDefault();
     const responseId = e.target.dataset.id;
@@ -157,6 +149,13 @@ function EditStepDetails() {
         nextStep: editForm.nextStep,
       },
     });
+    const stepMutationResponse = await addLinkedResponseStep({
+      variables:{
+        id: editForm.nextStep,
+        linkedResponses: responseId
+      }
+    })
+    window.location.reload();
   };
 
   // const [deleteResponse] = useMutation(DELETE_RESPONSE)
@@ -170,6 +169,7 @@ function EditStepDetails() {
   //     }
   //   })
   // }
+  console.log(stepsData)
 
   return (
     <div>
@@ -212,7 +212,9 @@ function EditStepDetails() {
                   DELETE
                 </button>
                 <h2>First Step</h2>
-                <h3>{findFirstStep().step}</h3>
+                <h3>
+                  {findStep(stepsData.steps[0].category.firstStep._id).step}
+                </h3>
               </div>
             ) : (
               <form onSubmit={submitFirstStep}>
@@ -274,9 +276,15 @@ function EditStepDetails() {
                           <p>No photo</p>
                         )}
                         {response.nextStep ? (
-                          <h3>{response.nextStep.step}</h3>
+                          <div>
+                            <h3>NextStep</h3>
+                            <p>{findStep(response.nextStep._id).step}</p>
+                          </div>
                         ) : (
-                          <form data-id={response._id} onSubmit={submitNextStep}>
+                          <form
+                            data-id={response._id}
+                            onSubmit={submitNextStep}
+                          >
                             <h3>NO NEXT STEP SET</h3>
                             <select
                               name="nextStep"
@@ -290,7 +298,7 @@ function EditStepDetails() {
                                 </option>
                               ))}
                             </select>
-                            <button >Submit</button>
+                            <button>Submit</button>
                           </form>
                         )}
                         {step.responses.length > 1 ? (

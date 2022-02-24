@@ -120,6 +120,34 @@ export const REMOVE_RESPONSE_FROM_STEP = gql`
   }
 `;
 
+export const ADD_LINKED_RESPONSE_TO_STEP = gql`
+  mutation AddLinkedResponsesStep($id: ID!, $linkedResponses: String!) {
+    addLinkedResponsesStep(_id: $id, linkedResponses: $linkedResponses) {
+      _id
+      step
+      description
+      linkedResponses {
+        _id
+        text
+      }
+    }
+  }
+`;
+
+export const REMOVE_LINKED_RESPONSE_FROM_STEP = gql`
+mutation RemoveLinkedResponsesStep($id: ID!, $linkedResponses: String!) {
+  removeLinkedResponsesStep(_id: $id, linkedResponses: $linkedResponses) {
+    _id
+    step
+    description
+    linkedResponses {
+      _id
+      text
+    }
+  }
+}
+`;
+
 export const EDIT_RESPONSE = gql`
   mutation Mutation(
     $id: ID!
