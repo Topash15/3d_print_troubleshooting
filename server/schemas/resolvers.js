@@ -128,9 +128,11 @@ const resolvers = {
     },
     // deletes step
     deleteStep: async (parent, args, context) => {
-      const step = await Step.deleteMany({_id: {
-        $all: [args._id]
-      }});
+      const step = await Step.deleteMany({
+        _id: {
+          $all: [args._id],
+        },
+      });
       return step;
     },
     // creates new response
@@ -139,11 +141,11 @@ const resolvers = {
       return response;
     },
     // sets nextStep for response
-    addNextStep: async (parent, args, context) => {
+    editResponse: async (parent, args, context) => {
       const response = await Response.findByIdAndUpdate(
         args._id,
         {
-          nextStep: args.nextStep,
+          ...args,
         },
         { new: true }
       ).populate("nextStep");

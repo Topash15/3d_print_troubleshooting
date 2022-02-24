@@ -73,7 +73,7 @@ const typeDefs = gql`
 
     
     addResponse(text: String!, photo: String): Response
-    addNextStep(_id: ID!, nextStep: String!): Response
+    editResponse(_id: ID!, text: String, photo: String, nextStep: String): Response
     deleteResponse(_id: ID!): Response
   }
 `;

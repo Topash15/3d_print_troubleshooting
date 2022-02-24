@@ -1,13 +1,25 @@
+import React, { useState } from "react";
+import "./style.css";
+import { useMutation } from "@apollo/client";
+import { CREATE_RESPONSE, ADD_RESPONSE_TO_STEP } from "../../utils/mutations";
+import { useNavigate, useParams } from "react-router-dom";
+import { useGlobalContext } from "../../utils/GlobalState";
+
+function CreateResponseForm() {
+    // call globalstate
+    const [state, dispatch] = useGlobalContext();
+    console.log(state);
+
   // RESPONSE CREATE FUNCTIONS
   // creates state for response form
   const [responseForm, setResponseForm] = useState({
     text: "",
+    photo: "",
     step: "",
     nextStep: "",
-    problem: "",
-    steps: [],
     errors: [],
   });
+
 
   // creates function for adding response to database
   const [createResponse] = useMutation(CREATE_RESPONSE);
@@ -30,7 +42,7 @@
       const responseId = mutationResponse.data.addResponse._id;
       const stepMutationResponse = await addResponseToStep({
         variables: {
-          id: responseForm.step,
+          id: state.currentStep,
           responses: responseId,
         },
       });
@@ -45,15 +57,6 @@
       [name]: value,
     });
     console.log(responseForm);
-  };
-
-  const filterSteps = () => {
-    if (responseForm.problem) {
-      let chosenProblem = state.problems.filter(
-        (problem) => problem._id === responseForm.problem
-      );
-      return chosenProblem[0].steps;
-    }
   };
 
   const validateResponse = async (responseForm) => {
@@ -76,49 +79,16 @@
     }
   };
 
-<form className="form createResponse" onSubmit={submitResponseHandler}>
-<h1>Response</h1>
-<label>
-  First you must select which problem and step the response is for
-</label>
-{problemData ? (
-  <select name="problem" onChange={handleResponseChange}>
-    <option value="">Choose a problem</option>
-    {problemData.problems.map((problem) => (
-      <option key={problem._id} value={problem._id}>
-        {problem.name}
-      </option>
-    ))}
-  </select>
-) : null}
-{responseForm.problem ? (
-  <select name="step" defaultValue="" onChange={handleResponseChange}>
-    <option value="">Choose a step</option>
-    {filterSteps().map((step) => (
-      <option
-        key={step._id}
-        value={step._id}
-        onChange={handleResponseChange}
-      >
-        {step.step}
-      </option>
-    ))}
-  </select>
-) : null}
-<label>Name</label>
-<input type="text" name="text" onChange={handleResponseChange}></input>
-<label>Description</label>
-<textarea
-  name="description"
-  type="text"
-  onChange={handleResponseChange}
-></textarea>
-<label>Photo Direct Link</label>
-<input type="text" name="photo" onChange={handleResponseChange}></input>
-<label>Useful URL</label>
-<input type="text" name="link" onChange={handleResponseChange}></input>
-<label>Add another Response?</label>
-{/* if checked, add second response form */}
-<input type="checkbox"></input>
-<button>Submit</button>
-</form>
+  return (
+    <form className="form createResponse" onSubmit={submitResponseHandler}>
+      <h1>Response</h1>
+      <label>Name</label>
+      <input type="text" name="text" onChange={handleResponseChange}></input>
+      <label>Photo Direct Link</label>
+      <input type="text" name="photo" onChange={handleResponseChange}></input>
+      <button>Submit</button>
+    </form>
+  );
+}
+
+export default CreateResponseForm;

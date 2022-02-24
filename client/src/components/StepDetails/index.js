@@ -20,7 +20,6 @@ function StepDetails() {
   });
   if (data) {
     const { step } = data;
-    // console.log(step);
   }
 
   const navigate = useNavigate();

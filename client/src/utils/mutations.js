@@ -112,6 +112,27 @@ export const ADD_RESPONSE_TO_STEP = gql`
   }
 `;
 
+export const REMOVE_RESPONSE_FROM_STEP = gql`
+  mutation Mutation($id: ID!, $responses: String!) {
+    removeResponsesStep(_id: $id, responses: $responses) {
+      _id
+    }
+  }
+`;
+
+export const EDIT_RESPONSE = gql`
+  mutation Mutation(
+    $id: ID!
+    $text: String
+    $photo: String
+    $nextStep: String
+  ) {
+    editResponse(_id: $id, text: $text, photo: $photo, nextStep: $nextStep) {
+      _id
+    }
+  }
+`;
+
 export const DELETE_STEP = gql`
   mutation Mutation($id: ID!) {
     deleteStep(_id: $id) {
