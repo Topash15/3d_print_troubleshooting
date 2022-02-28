@@ -72,7 +72,7 @@ const typeDefs = gql`
     removeResponsesStep(_id: ID!, responses: String!): Step
     addLinkedResponsesStep(_id: ID!, linkedResponses: String!): Step
     removeLinkedResponsesStep(_id: ID!, linkedResponses: String!): Step
-    deleteStep(_id: ID!): Step
+    deleteStep(_id: ID, category: String): Step
 
     
     addResponse(text: String!, photo: String): Response

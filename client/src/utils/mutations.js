@@ -162,8 +162,8 @@ export const EDIT_RESPONSE = gql`
 `;
 
 export const DELETE_STEP = gql`
-  mutation Mutation($id: ID!) {
-    deleteStep(_id: $id) {
+  mutation Mutation($id: ID, $category: String) {
+    deleteStep(_id: $id, category: $category) {
       _id
     }
   }

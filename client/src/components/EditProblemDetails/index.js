@@ -5,7 +5,7 @@ import {
   EDIT_RESPONSE,
   DELETE_RESPONSE,
   REMOVE_RESPONSE_FROM_STEP,
-  ADD_LINKED_RESPONSE_TO_STEP
+  ADD_LINKED_RESPONSE_TO_STEP,
 } from "../../utils/mutations";
 import React, { useState, useEffect } from "react";
 import "./style.css";
@@ -67,10 +67,36 @@ function EditStepDetails() {
 
   const editProblemBtn = async (e) => {};
   const [deleteProblem] = useMutation(DELETE_PROBLEM);
+  const [deleteResponse] = useMutation(DELETE_RESPONSE);
   const deleteProblemBtn = async (e) => {
+    // COMMENTED OUT SECTION:
+    // code for retrieving responses for each step
+    // const responseIds = [];
+    // stepsData.steps.forEach(step => {
+    //   step.responses.forEach(response => {
+    //     responseIds.push(response._id);
+    //   })
+    // })
+    // console.log(responseIds)
+    // const responseMutationResponse = await deleteResponse({
+    //   variables: {
+    //     id: responseIds
+    //   }
+    // })
+    // console.log(responseMutationResponse)
+
+    // deletes all related steps
+    const stepMutationResponse = await deleteStep({
+      variables: {
+        category: id,
+      },
+    });
+
+    // deletes problem
     const mutationResponse = await deleteProblem({
       variables: { id: id },
     });
+
     window.location.assign("/mod-entry/");
   };
 
@@ -84,14 +110,16 @@ function EditStepDetails() {
         id: stepId,
       },
     });
-    // changes problems first step to null if step being deleted is the first step
-    if (stepId === stepsData.steps[0].category.firstStep._id) {
-      const problemMutationResponse = await editProblem({
-        variables: {
-          id: id,
-          firstStep: null,
-        },
-      });
+    // changes problem's first step to null if step being deleted was the first step
+    if (stepsData.steps[0].category.firstStep) {
+      if (stepId === stepsData.steps[0].category.firstStep._id) {
+        const problemMutationResponse = await editProblem({
+          variables: {
+            id: id,
+            firstStep: null,
+          },
+        });
+      }
     }
     window.location.reload();
   };
@@ -138,7 +166,7 @@ function EditStepDetails() {
   };
 
   // used to set nextStep for response
-  const [addLinkedResponseStep] = useMutation(ADD_LINKED_RESPONSE_TO_STEP)
+  const [addLinkedResponseStep] = useMutation(ADD_LINKED_RESPONSE_TO_STEP);
   const [editResponse] = useMutation(EDIT_RESPONSE);
   const submitNextStep = async (e) => {
     e.preventDefault();
@@ -150,11 +178,11 @@ function EditStepDetails() {
       },
     });
     const stepMutationResponse = await addLinkedResponseStep({
-      variables:{
+      variables: {
         id: editForm.nextStep,
-        linkedResponses: responseId
-      }
-    })
+        linkedResponses: responseId,
+      },
+    });
     window.location.reload();
   };
 
@@ -169,7 +197,7 @@ function EditStepDetails() {
   //     }
   //   })
   // }
-  console.log(stepsData)
+  console.log(stepsData);
 
   return (
     <div>

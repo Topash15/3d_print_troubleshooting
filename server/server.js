@@ -11,7 +11,8 @@ const startServer = async () => {
     // creates server with schema data
     const server = new ApolloServer ({
         typeDefs,
-        resolvers
+        resolvers,
+        shouldBatch: true,
     });
 
     // start apollo server

@@ -40,7 +40,7 @@ const resolvers = {
       const step = Step.findById(_id)
         .populate("responses")
         .populate("category")
-        .populate('linkedResponses');
+        .populate("linkedResponses");
       return step;
     },
     // get all responses
@@ -96,7 +96,7 @@ const resolvers = {
       )
         .populate("category")
         .populate("responses")
-        .populate('linkedResponses');
+        .populate("linkedResponses");
       return step;
     },
     // sets category for step
@@ -156,12 +156,23 @@ const resolvers = {
     },
     // deletes step
     deleteStep: async (parent, args, context) => {
-      const step = await Step.deleteMany({
-        _id: {
-          $all: [args._id],
-        },
-      });
-      return step;
+      const { category, _id } = args;
+
+      // if no category is specified, delete by _id
+      // allows for deleting all steps within single Problem
+      if (!category) {
+        const step = await Step.deleteMany({
+          _id: {
+            $all: [_id],
+          },
+        });
+        return step;
+      } else {
+        const step = await Step.deleteMany({
+          category: category,
+        });
+        return step;
+      }
     },
     // creates new response
     addResponse: async (parent, args, context) => {
@@ -180,8 +191,12 @@ const resolvers = {
       return response;
     },
     // deletes response
-    deleteResponse: async (parent, { _id }, context) => {
-      const response = await Response.findByIdAndDelete(_id, { new: true });
+    deleteResponse: async (parent, args, context) => {
+      const response = await Response.deleteMany({
+        id: {
+          $in: args.id,
+        },
+      });
       return response;
     },
   },
