@@ -11,6 +11,7 @@ import ModEntry from "./pages/ModEntry";
 import EditProblem from "./pages/EditProblem";
 import EditStep from "./pages/EditStep";
 import Error404 from "./pages/Error404";
+import Feedback from "./pages/Feedback";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -43,6 +44,7 @@ function App() {
             <Route path='/edit-problems/:id' element={<EditProblem />}></Route>
             <Route path='/edit-steps/:id' element={<EditStep />}></Route>
             <Route path='/404' element={<Error404 />}></Route>
+            <Route path='/feedback' element={<Feedback />}></Route>
             {/* <Route path='/feedback' element={<Feedback />}></Route> */}
             {/* <Route path='/contact' element={<Contact />}></Route> */}
           </Routes>

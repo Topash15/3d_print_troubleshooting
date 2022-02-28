@@ -10,7 +10,7 @@ function Nav() {
           <a className="nav-link" href="/">Home</a>
         </li>
         <li className="nav-list-item">
-          <a className="nav-link" href="#">Feedback</a>
+          <a className="nav-link" href="/feedback">Feedback</a>
         </li>
         <li className="nav-list-item">
           <a className="nav-link" href="#">Contact</a>
