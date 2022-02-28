@@ -11,9 +11,6 @@ function Footer() {
         <li className="footer-list-item">
           <a className="footer-link" href="/feedback">Feedback</a>
         </li>
-        <li className="footer-list-item">
-          <a className="footer-link" href="#">Contact</a>
-        </li>
       </ul>
     </footer>
   );

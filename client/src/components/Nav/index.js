@@ -13,9 +13,6 @@ function Nav() {
           <a className="nav-link" href="/feedback">Feedback</a>
         </li>
         <li className="nav-list-item">
-          <a className="nav-link" href="#">Contact</a>
-        </li>
-        <li className="nav-list-item">
           <a className="nav-link" href="/mod-entry">Create Entry</a>
         </li>
       </ul>
