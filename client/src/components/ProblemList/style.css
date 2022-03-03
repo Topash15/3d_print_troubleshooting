@@ -1,6 +1,12 @@
+.problem-section{
+    height: 85vh;
+    margin-left: 15vw;
+    margin-right: 15vw;
+}
+
 .problem-card-container{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 1em;
     padding: 2em;
@@ -12,14 +18,27 @@
     align-items: center;
     border: 1px solid var(--secondary);
     border-radius: 0.5em;
-    box-shadow: .1em .1em;
+    box-shadow: .2em .2em rgba(0,0,0,0.8);
     padding: 1em;
+    background: var(--secondary);
+    color: var(--text);
 }
 
 .problem-card:hover{
-    box-shadow: .1em .1em inset;
+    box-shadow: .2em .2em inset rgba(0,0,0,0.5);
 }
 
 .problem-card-image{
     width: 10em;
+}
+
+.problem-card-title{
+    font-weight: normal;
+    padding: .5em;
+    letter-spacing: .05em;
+}
+
+.problem-card-description{
+    font-family: sans-serif;
+    letter-spacing: .05em;
 }

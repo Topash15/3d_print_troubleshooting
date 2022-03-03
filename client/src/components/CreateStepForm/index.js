@@ -148,7 +148,7 @@ function EntryForm() {
   return (
     <section className="step-form hidden">
       <form className="form createStep" onSubmit={submitStepHandler}>
-        <h1>Step</h1>
+        <h1 className="form-title">Step</h1>
         {!id && problemData ? (
           <div>
             <label>To which problem does this step belong?</label>
@@ -174,8 +174,8 @@ function EntryForm() {
         <input name="photo" type="text" onChange={handleStepChange}></input>
         <label>Useful URL</label>
         <input name="link" type="text" onChange={handleStepChange}></input>
-        <h1>Response</h1>
-        <p>
+        <h1 className="form-title">Response</h1>
+        <p className="form-side-note">
           Note that the{" "}
           <i>
             <b>Solved</b>
@@ -187,9 +187,6 @@ function EntryForm() {
         <input type="text" name="responseText" onChange={handleStepChange}></input>
         <label>Response Photo Link</label>
         <input type="text" name="responsePhoto" onChange={handleStepChange}></input>
-        <label>Add another Response?</label>
-        {/* if checked, add second response form */}
-        <input type="checkbox"></input>
         <button>Submit</button>
       </form>
     </section>

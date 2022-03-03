@@ -43,14 +43,14 @@ function ProblemList() {
 
   const selectProblem = (firstStep) => {
     if (firstStep) {
-      const {_id} = firstStep;
+      const { _id } = firstStep;
       dispatch({
         type: UPDATE_CURRENT_PROBLEM,
         currentProblem: _id,
       });
       navigate("/step/" + _id);
     } else {
-      navigate('/404')
+      navigate("/404");
     }
   };
 
@@ -60,11 +60,9 @@ function ProblemList() {
       <div className="problem-card-container">
         {problemData
           ? problemData.problems.map((problem) => (
-              <div key={problem._id} className="problem-card">
-                <h2 className="problem-card-title">{problem.name}</h2>
-                <p className="problem-card-description">
-                  {problem.description}
-                </p>
+              <button key={problem._id} className="problem-card"                   onClick={() => {
+                selectProblem(problem.firstStep);
+              }}>
                 {problem.photos ? (
                   <img
                     alt={problem.name}
@@ -72,20 +70,13 @@ function ProblemList() {
                     src={problem.photos}
                   ></img>
                 ) : null}
-                <a className="problem-card-link" href={problem.link}>
-                  Click here to learn more
-                </a>
-                <button
-                  className="problem-card-btn"
-                  onClick={() => {
-                    selectProblem(problem.firstStep);
-                  }}
-                >
-                  This is my Problem
-                </button>
-              </div>
+                <h2 className="problem-card-title">{problem.name}</h2>
+                <p className="problem-card-description">
+                  {problem.description}
+                </p>
+              </button>
             ))
-          : null}
+          : <div>No problems found</div>}
       </div>
     </section>
   );

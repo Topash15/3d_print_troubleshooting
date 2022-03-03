@@ -1,17 +1,18 @@
 /* Main Page */
 
 :root{
-  --primary: rgb(255, 179, 0);
-  --secondary: rgb(37, 37, 37);
-  --text: black;
-  background: rgb(177, 177, 177);
+  --primary: #70A0E8;
+  --secondary: #577DB5;
+  --tertiary: #324869;
+  --text: #FFFFFF;
+  background: #EEEEEE;
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Helvetica', sans-serif;
+  font-family: serif;
 }
 
 html {

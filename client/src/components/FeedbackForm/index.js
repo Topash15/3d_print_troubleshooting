@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
-import emailjs from '@emailjs/browser';
+import React, { useRef } from "react";
+import emailjs from "@emailjs/browser";
+import "./style.css";
 
 function FeedbackForm() {
   const form = useRef();
@@ -25,19 +26,21 @@ function FeedbackForm() {
   };
 
   return (
-    <form ref={form} onSubmit={sendEmail}>
-      <label>Name</label>
-      <input type="text" name="user_name" />
-      <label>Email</label>
-      <input type="email" name="user_email" />
-      <label>Problem</label>
-      <input type="text" name="problem" />
-      <label>Step</label>
-      <input type="text" name="step" />
-      <label>Message</label>
-      <textarea name="message" />
-      <input type="submit" value="Send" />
-    </form>
+    <div className= "feedback-form-container">
+      <form className="feedback-form" ref={form} onSubmit={sendEmail}>
+        <label>Name</label>
+        <input className="feedback-input" type="text" name="user_name" />
+        <label>Email</label>
+        <input className="feedback-input" type="email" name="user_email" />
+        <label>Problem</label>
+        <input className="feedback-input" type="text" name="problem" />
+        <label>Step</label>
+        <input className="feedback-input" type="text" name="step" />
+        <label>Message</label>
+        <textarea className="feedback-input" name="message" />
+        <input type="submit" value="Send" />
+      </form>
+    </div>
   );
 }
 

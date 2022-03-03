@@ -1,0 +1,13 @@
+.step-container{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}
+
+.response-list{
+    list-style-type: none;
+    display: flex;
+    width:70%;
+    justify-content: space-around;
+}

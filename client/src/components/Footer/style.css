@@ -1,5 +1,10 @@
 footer{
     background-color: var(--primary);
+    width: 100%;
+    height:10vh;
+    bottom: 0;
+    left: 0;
+    margin-right: 10em;
 }
 
 .footer-web-title{

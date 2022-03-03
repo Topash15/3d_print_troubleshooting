@@ -37,30 +37,37 @@ function StepDetails() {
   return (
     <section>
       {data ? (
-        <div key={data._id}>
+        <div className="step-container" key={data._id}>
           <h1>{data.step.step}</h1>
           <h2>{data.step.description}</h2>
-          <div>
+          <ul className="response-list">
+          <li>
             <button>Solved!</button>
-          </div>
-          {data.step.responses.map((response) => (
-            <div key={response._id}>
-              {response.photo ? (
-                <img src={response.photo} alt={response.text}></img>
-              ) : null}
-              {response.nextStep ? (<button
-                id={response.nextStep._id}
-                onClick={()=>{loadNextStep(response.nextStep._id)}}
-                href={"/step/" + response.nextStep._id}
-              >
-                {response.text}
-              </button>): <button
-                disabled
-              ><p>This option does not have a next step</p>
-                {response.text}
-              </button> }
-            </div>
-          ))}
+          </li>
+            {data.step.responses.map((response) => (
+              <li className="response-list-item" key={response._id}>
+                {response.photo ? (
+                  <img src={response.photo} alt={response.text}></img>
+                ) : null}
+                {response.nextStep ? (
+                  <button
+                    id={response.nextStep._id}
+                    onClick={() => {
+                      loadNextStep(response.nextStep._id);
+                    }}
+                    href={"/step/" + response.nextStep._id}
+                  >
+                    {response.text}
+                  </button>
+                ) : (
+                  <button disabled>
+                    <p>This option does not have a next step</p>
+                    {response.text}
+                  </button>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
       ) : null}
     </section>

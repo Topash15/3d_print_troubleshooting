@@ -1,8 +1,50 @@
 form{
     display: flex;
     flex-direction: column;
+    justify-content:center;
+    align-items:center;
     margin-left: 25em;
     margin-right: 25em;
+    padding: 0.5em;
+    background-color: var(--secondary);
+    border-radius: 0.5em;
+}
+
+input{
+    width:55%;
+    padding: 1em;
+    border: 0px;
+    border-radius: .5em;
+}
+
+textarea{
+    width:55%;
+    padding: 1em;
+    border-radius: .5em;
+}
+
+label{
+    color: var(--text);
+    padding: .5em;
+    font-size: 1.1em;
+}
+
+.form-title{
+    color: var(--text);
+    background-repeat: no-repeat;
+}
+
+.form-side-note{
+    color: var(--text);
+    padding: .5em;
+}
+
+button{
+    font-family: sans-serif;
+    padding: .7em;
+    margin-top: 1em;
+    border-radius: .5em;
+    color: var(--tertiary);
 }
 
 /* .hidden{
