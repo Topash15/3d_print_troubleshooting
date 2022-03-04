@@ -6,11 +6,15 @@
 }
 
 .feedback-form{
-    width: 10%;
-    height: 70%;
+    width: 50%;
+    height: 550px;
     padding: 0;
 }
 
 .feedback-input{
     width:90%;
+}
+
+.feedback-button{
+    margin-top: 10px;
 }

@@ -38,12 +38,14 @@ function StepDetails() {
     <section>
       {data ? (
         <div className="step-container" key={data._id}>
-          <h1>{data.step.step}</h1>
-          <h2>{data.step.description}</h2>
+          <div className="step-text">
+            <h1 className="step-title">{data.step.step}</h1>
+            <p className="step-description">{data.step.description}</p>
+          </div>
           <ul className="response-list">
-          <li>
-            <button>Solved!</button>
-          </li>
+            <li className="response-list-item">
+              <button className=" step-response-button">Solved!</button>
+            </li>
             {data.step.responses.map((response) => (
               <li className="response-list-item" key={response._id}>
                 {response.photo ? (
@@ -51,6 +53,7 @@ function StepDetails() {
                 ) : null}
                 {response.nextStep ? (
                   <button
+                    className="step-response-button"
                     id={response.nextStep._id}
                     onClick={() => {
                       loadNextStep(response.nextStep._id);
@@ -60,9 +63,11 @@ function StepDetails() {
                     {response.text}
                   </button>
                 ) : (
-                  <button disabled>
-                    <p>This option does not have a next step</p>
+                  <button className="step-response-button" disabled>
                     {response.text}
+                    <span className="response-notice">
+                      This option does not have a next step
+                    </span>
                   </button>
                 )}
               </li>

@@ -165,6 +165,13 @@ function EditStepDetails() {
     });
   };
 
+  // close response form
+  const closeResponseForm = (e) => {
+    setResponseIsOpen({
+      createResponse: false,
+    });
+  };
+
   // used to set nextStep for response
   const [addLinkedResponseStep] = useMutation(ADD_LINKED_RESPONSE_TO_STEP);
   const [editResponse] = useMutation(EDIT_RESPONSE);
@@ -212,160 +219,187 @@ function EditStepDetails() {
         </div>
       ) : (
         <div>
-          <div className="problem-card">
-            <h1>Problem</h1>
-            <h3>Problem name :{stepsData.steps[0].category.name}</h3>
-            <h3>
-              Problem Description :{stepsData.steps[0].category.description}
-            </h3>
-            {stepsData.steps[0].category.link ? (
-              <a href={stepsData.steps[0].category.link} />
-            ) : (
-              <h3>No Link</h3>
-            )}
-            {stepsData.steps[0].category.photos ? (
-              <img
-                src={stepsData.steps[0].category.photos}
-                alt={stepsData.steps[0].category.name}
-              />
-            ) : (
-              <h3>No photo</h3>
-            )}
-            {stepsData.steps[0].category.firstStep ? (
-              <div>
-                <button className="edit-btn" onClick={editProblemBtn}>
-                  EDIT
-                </button>
-                <button className="delete-btn" onClick={deleteProblemBtn}>
-                  DELETE
-                </button>
-                <h2>First Step</h2>
-                <h3>
-                  {findStep(stepsData.steps[0].category.firstStep._id).step}
-                </h3>
-              </div>
-            ) : (
-              <form onSubmit={submitFirstStep}>
-                <h3>
-                  No first step specified. Please select a first step and click
-                  confirm.
-                </h3>
-                <select
-                  name="firstStep"
-                  onChange={onChangeEditForm}
-                  defaultValue=""
-                >
-                  <option value="">Choose a step</option>
-                  {stepsData.steps.map((step) => (
-                    <option key={step._id} value={step._id}>
-                      {step.step}
-                    </option>
-                  ))}
-                </select>
-                <button>Confirm</button>
-              </form>
-            )}
-          </div>
-          <h2>Steps</h2>
-          <div className="step-card-container">
-            <div className="step-card" id="add-step" onClick={createStep}>
-              <h2 className="step-card-title">Add a step</h2>
-              <img className="step-card-image" src={plus} alt="add Step" />
-            </div>
-            {stepsData.steps.map((step) => (
-              <div key={step._id} className="step-card">
-                <h2>{step.step}</h2>
-                <p>{step.description}</p>
+          <div className="problem-edit-card-container">
+            <div className="problem-edit-card">
+              <h1 className="problem-card-heading">Problem</h1>
+              <h2 className="problem-card-title">Problem Name:</h2>
+              <p className="problem-card-name">
+                {stepsData.steps[0].category.name}
+              </p>
+              <h2 className="problem-card-title">Problem Description:</h2>
+              <p className="problem-card-description">
+                {stepsData.steps[0].category.description}
+              </p>
+              <h2 className="problem-card-title">Link:</h2>
+              {stepsData.steps[0].category.link ? (
+                <a href={stepsData.steps[0].category.link} />
+              ) : (
+                <p className="problem-card-link">No Link</p>
+              )}
+              <h2 className="problem-card-title">Photo:</h2>
+              {stepsData.steps[0].category.photos ? (
+                <img
+                  className="problem-card-photo"
+                  src={stepsData.steps[0].category.photos}
+                  alt={stepsData.steps[0].category.name}
+                />
+              ) : (
+                <p className="problem-card-photo">No photo</p>
+              )}
+              {stepsData.steps[0].category.firstStep ? (
                 <div>
-                  <button
-                    data-id={step._id}
-                    className="edit-btn"
-                    onClick={editStepBtn}
-                  >
+                  <button className="edit-btn" onClick={editProblemBtn}>
                     EDIT
                   </button>
-                  <button
-                    data-id={step._id}
-                    className="delete-btn"
-                    onClick={deleteStepBtn}
-                  >
+                  <button className="delete-btn" onClick={deleteProblemBtn}>
                     DELETE
                   </button>
+                  <h2 className="problem-card-title">First Step</h2>
+                  <p className="problem-card-first-step">
+                    {findStep(stepsData.steps[0].category.firstStep._id).step}
+                  </p>
                 </div>
-                <h2>Responses</h2>
-                <ol className="response-list">
-                  {step.responses ? (
-                    step.responses.map((response) => (
-                      <li id={response._id} key={response._id}>
-                        <h3>{response.text}</h3>
-                        {response.photo ? (
-                          <img src={response.photo} alt={response.text} />
-                        ) : (
-                          <p>No photo</p>
-                        )}
-                        {response.nextStep ? (
-                          <div>
-                            <h3>NextStep</h3>
-                            <p>{findStep(response.nextStep._id).step}</p>
-                          </div>
-                        ) : (
-                          <form
-                            data-id={response._id}
-                            onSubmit={submitNextStep}
-                          >
-                            <h3>NO NEXT STEP SET</h3>
-                            <select
-                              name="nextStep"
-                              onChange={onChangeEditForm}
-                              defaultValue=""
-                            >
-                              <option value="">Pick a next Step</option>
-                              {filterSteps(step._id).map((nextStep) => (
-                                <option key={nextStep._id} value={nextStep._id}>
-                                  {nextStep.step}
-                                </option>
-                              ))}
-                            </select>
-                            <button>Submit</button>
-                          </form>
-                        )}
-                        {step.responses.length > 1 ? (
-                          <button
-                            data-id={step._id}
-                            className="delete-btn"
-                            id={response._id}
-                            // onClick={deleteResponse}
-                          >
-                            DELETE
-                          </button>
-                        ) : (
-                          <div>
-                            <p>
-                              Must have more than one response in a step before
-                              you can delete a response.
-                            </p>
-                            <button disabled>DELETE</button>
-                          </div>
-                        )}
-                      </li>
-                    ))
-                  ) : (
-                    <h4>No responses</h4>
-                  )}
-                  <li>
+              ) : (
+                <form onSubmit={submitFirstStep}>
+                  <h3>
+                    No first step specified. Please select a first step and
+                    click confirm.
+                  </h3>
+                  <select
+                    name="firstStep"
+                    onChange={onChangeEditForm}
+                    defaultValue=""
+                  >
+                    <option value="">Choose a step</option>
+                    {stepsData.steps.map((step) => (
+                      <option key={step._id} value={step._id}>
+                        {step.step}
+                      </option>
+                    ))}
+                  </select>
+                  <button>Confirm</button>
+                </form>
+              )}
+            </div>
+          </div>
+          <section className="step-section flex-column">
+            <h1>Steps</h1>
+            <div className="step-card-container">
+              <div className="step-card" id="add-step" onClick={createStep}>
+                <h2 className="step-card-title">Add a step</h2>
+                <img className="step-card-image" src={plus} alt="add Step" />
+              </div>
+              {stepsData.steps.map((step) => (
+                <div key={step._id} className="step-card">
+                  <h2>{step.step}</h2>
+                  <p>{step.description}</p>
+                  <div>
                     <button
                       data-id={step._id}
-                      className="add-btn"
-                      onClick={createResponse}
+                      className="edit-btn"
+                      onClick={editStepBtn}
                     >
-                      Add Response
+                      EDIT
                     </button>
-                  </li>
-                </ol>
+                    <button
+                      data-id={step._id}
+                      className="delete-btn"
+                      onClick={deleteStepBtn}
+                    >
+                      DELETE
+                    </button>
+                  </div>
+                  <h2>Responses</h2>
+                  <ol className="response-list flex-column">
+                    {step.responses ? (
+                      step.responses.map((response) => (
+                        <li id={response._id} key={response._id}>
+                          <h3>{response.text}</h3>
+                          {response.photo ? (
+                            <img src={response.photo} alt={response.text} />
+                          ) : (
+                            <p>No photo</p>
+                          )}
+                          {response.nextStep ? (
+                            <div>
+                              <h3>NextStep</h3>
+                              <p>{findStep(response.nextStep._id).step}</p>
+                            </div>
+                          ) : (
+                            <form
+                              className="response-next-step-form"
+                              data-id={response._id}
+                              onSubmit={submitNextStep}
+                            >
+                              <h3>NO NEXT STEP SET</h3>
+                              <select
+                                name="nextStep"
+                                onChange={onChangeEditForm}
+                                defaultValue=""
+                              >
+                                <option value="">Pick a next Step</option>
+                                {filterSteps(step._id).map((nextStep) => (
+                                  <option
+                                    key={nextStep._id}
+                                    value={nextStep._id}
+                                  >
+                                    {nextStep.step}
+                                  </option>
+                                ))}
+                              </select>
+                              <button>Submit</button>
+                            </form>
+                          )}
+                          {step.responses.length > 1 ? (
+                            <button
+                              data-id={step._id}
+                              className="delete-btn"
+                              id={response._id}
+                              // onClick={deleteResponse}
+                            >
+                              DELETE
+                            </button>
+                          ) : (
+                            <div>
+                              <p>
+                                Must have more than one response in a step
+                                before you can delete a response.
+                              </p>
+                              <button disabled>DELETE</button>
+                            </div>
+                          )}
+                        </li>
+                      ))
+                    ) : (
+                      <h4>No responses</h4>
+                    )}
+                    <li>
+                      <button
+                        data-id={step._id}
+                        className="add-btn"
+                        onClick={createResponse}
+                      >
+                        Add Response
+                      </button>
+                    </li>
+                  </ol>
+                </div>
+              ))}
+            </div>
+          </section>
+          {responseIsOpen.createResponse ? (
+            <div className="create-response-background">
+              <div className="response-form-container flex-column">
+                <button
+                  className="btn close-response-form"
+                  onClick={closeResponseForm}
+                >
+                  X
+                </button>
+                <CreateResponseForm />
               </div>
-            ))}
-          </div>
-          {responseIsOpen.createResponse ? <CreateResponseForm /> : null}
+            </div>
+          ) : null}
         </div>
       )}
     </div>

@@ -80,7 +80,7 @@ function CreateResponseForm() {
   };
 
   return (
-    <form className="form createResponse" onSubmit={submitResponseHandler}>
+    <form className="form create-response-form" onSubmit={submitResponseHandler}>
       <h1>Response</h1>
       <label>Name</label>
       <input type="text" name="text" onChange={handleResponseChange}></input>
