@@ -1,8 +1,12 @@
 .feedback-form-container{
-    height: 90vh;
+    height: 77vh;
     display: flex;
     justify-content:center;
     align-items:center;
+}
+
+.feedback-text-div{
+    margin-top: 1em;
 }
 
 .feedback-form{
