@@ -5,24 +5,23 @@ function Nav() {
   return (
     <nav>
       <div className="nav-title-container">
-        <h1 className="nav-web-title">3D Help</h1>
-        <h2 className="nav-web-subtitle">
-          3D Printer troubleshooting made simple
-        </h2>
+        <a className="nav-link link" href="/">
+          <h1 className="nav-web-title">3D Assistant</h1>
+        </a>
       </div>
       <ul className="nav-list">
         <li className="nav-list-item">
-          <a className="nav-link" href="/">
-            Home
+          <a className="nav-link link" href="/view-problem-list">
+            View Problems
           </a>
         </li>
         <li className="nav-list-item">
-          <a className="nav-link" href="/feedback">
+          <a className="nav-link link" href="/feedback">
             Feedback
           </a>
         </li>
         <li className="nav-list-item">
-          <a className="nav-link" href="/mod-entry">
+          <a className="nav-link link" href="/mod-entry">
             Create Entry
           </a>
         </li>

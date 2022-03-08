@@ -1,18 +1,18 @@
 /* Main Page */
 
 :root{
-  --primary: #70A0E8;
-  --secondary: #577DB5;
+  --primary: #33E09B;
+  --secondary: #7AE6BA;
   --tertiary: #324869;
-  --text: #FFFFFF;
-  background: #EEEEEE;
+  --text: #166143;
+  background: var(--primary);
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: serif;
+  font-family: sans-serif;
 }
 
 html {
@@ -31,4 +31,10 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.link{
+  color: var(--text);
+  font-style: none;
+  text-decoration: none;
 }

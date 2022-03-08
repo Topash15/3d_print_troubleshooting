@@ -12,6 +12,7 @@ import EditProblem from "./pages/EditProblem";
 import EditStep from "./pages/EditStep";
 import Error404 from "./pages/Error404";
 import Feedback from "./pages/Feedback";
+import LandingPage from "./pages/LandingPage";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -38,7 +39,8 @@ function App() {
       <div className="App">
         <GlobalProvider>
           <Routes>
-            <Route path='/' element={<Home />}></Route>
+            <Route path='/' element={<LandingPage />}></Route>
+            <Route path='/view-problem-list' element={<Home />}></Route>
             <Route path='step/:id' element={<Step />}></Route>
             <Route path='/mod-entry' element={<ModEntry />}></Route>
             <Route path='/edit-problems/:id' element={<EditProblem />}></Route>
