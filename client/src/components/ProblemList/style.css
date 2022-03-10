@@ -4,6 +4,18 @@
     margin-right: 15vw;
 }
 
+.section-title-container{
+    margin-top: 1rem;
+}
+
+.section-title{
+    width: fit-content;
+    padding: 2rem;
+    text-align: left;
+    background-color: var(--secondary);
+    border-radius: 25rem;
+}
+
 .problem-card-container{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

@@ -248,9 +248,9 @@ function EditStepDetails() {
               )}
               {stepsData.steps[0].category.firstStep ? (
                 <div>
-                  <button className="edit-btn" onClick={editProblemBtn}>
+                  {/* <button className="edit-btn" onClick={editProblemBtn}>
                     EDIT
-                  </button>
+                  </button> */}
                   <button className="delete-btn" onClick={deleteProblemBtn}>
                     DELETE
                   </button>
@@ -294,13 +294,13 @@ function EditStepDetails() {
                   <h2>{step.step}</h2>
                   <p>{step.description}</p>
                   <div>
-                    <button
+                    {/* <button
                       data-id={step._id}
                       className="edit-btn"
                       onClick={editStepBtn}
                     >
                       EDIT
-                    </button>
+                    </button> */}
                     <button
                       data-id={step._id}
                       className="delete-btn"

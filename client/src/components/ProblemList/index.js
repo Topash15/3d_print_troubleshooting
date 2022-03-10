@@ -57,26 +57,33 @@ function ProblemList() {
   return (
     <section className="problem-section">
       {/* future search bar */}
+      <div className="section-title-container">
+        <h1 className="section-title">What can I help you with?</h1>
+      </div>
       <div className="problem-card-container">
-        {problemData
-          ? problemData.problems.map((problem) => (
-              <button key={problem._id} className="problem-card"                   onClick={() => {
+        {problemData ? (
+          problemData.problems.map((problem) => (
+            <button
+              key={problem._id}
+              className="problem-card"
+              onClick={() => {
                 selectProblem(problem.firstStep);
-              }}>
-                {problem.photos ? (
-                  <img
-                    alt={problem.name}
-                    className="problem-card-image"
-                    src={problem.photos}
-                  ></img>
-                ) : null}
-                <h2 className="problem-card-title">{problem.name}</h2>
-                <p className="problem-card-description">
-                  {problem.description}
-                </p>
-              </button>
-            ))
-          : <div>No problems found</div>}
+              }}
+            >
+              {problem.photos ? (
+                <img
+                  alt={problem.name}
+                  className="problem-card-image"
+                  src={problem.photos}
+                ></img>
+              ) : null}
+              <h2 className="problem-card-title">{problem.name}</h2>
+              <p className="problem-card-description">{problem.description}</p>
+            </button>
+          ))
+        ) : (
+          <div>No problems found</div>
+        )}
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import bot from "../../assets/bot.svg";
 
 function Hero() {
   return (
@@ -11,7 +12,14 @@ function Hero() {
         </p>
       </div>
       <div className="hero-image-container">
-          <img src="http://placehold.it/" alt="Assistant"></img>
+        <img className="hero-image" src={bot} alt="Assistant"></img>
+        <a
+          hidden
+          href="https://www.flaticon.com/free-icons/bot"
+          title="bot icons"
+        >
+          Bot icons created by Smashicons - Flaticon
+        </a>
       </div>
       <div className="hero-action-container">
         <a className="hero-link link" href="/view-problems">

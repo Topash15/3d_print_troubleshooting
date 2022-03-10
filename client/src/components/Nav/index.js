@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import bot from '../../assets/bot.svg'
 
 function Nav() {
   return (
@@ -7,6 +8,7 @@ function Nav() {
       <div className="nav-title-container">
         <a className="nav-link link" href="/">
           <h1 className="nav-web-title">3D Assistant</h1>
+          <img className="nav-bot-img" src= {bot} alt='bot' />
         </a>
       </div>
       <ul className="nav-list">

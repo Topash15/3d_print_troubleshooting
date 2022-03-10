@@ -1,3 +1,22 @@
+.feedback-section{
+    display: grid;
+    margin-left: 15vw;
+    margin-right: 15vw;
+}
+
+.section-title-container{
+    margin-top: 1rem;
+}
+
+.section-title{
+    width: fit-content;
+    padding: 2rem;
+    text-align: left;
+    background-color: var(--secondary);
+    border-radius: 25rem;
+}
+
+
 .feedback-form-container{
     height: 77vh;
     display: flex;
@@ -10,9 +29,9 @@
 }
 
 .feedback-form{
-    width: 50%;
+    width: 80%;
     height: 550px;
-    padding: 0;
+    margin: 0;
 }
 
 .feedback-input{

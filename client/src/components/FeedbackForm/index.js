@@ -8,25 +8,41 @@ function FeedbackForm() {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        "service_l5aan6o",
-        "template_2k1x2dp",
-        form.current,
-        "user_6LeDgfqXZFhGlBkRsgZha"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+    if (validateFeedback()) {
+      emailjs
+        .sendForm(
+          "service_l5aan6o",
+          "template_2k1x2dp",
+          form.current,
+          "user_6LeDgfqXZFhGlBkRsgZha"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    } else {
+      console.log('error!')
+    }
+  };
+
+  const validateFeedback = () => {
+    let formMessage = form.current[4].value;
+    if (!formMessage) {
+      console.log('message required')
+      return false;
+    }
+    return true;
   };
 
   return (
     <section className="feedback-section">
+      <div className="section-title-container">
+        <h1 className="section-title">What can I help you with?</h1>
+      </div>
       <div className="feedback-text-div">
         <h1>Have feedback?</h1>
         <p>
@@ -45,7 +61,7 @@ function FeedbackForm() {
           <input className="feedback-input" type="text" name="problem" />
           <label>Step</label>
           <input className="feedback-input" type="text" name="step" />
-          <label>Message</label>
+          <label>Message*</label>
           <textarea className="feedback-input" name="message" />
           <input className="feedback-button" type="submit" value="Send" />
         </form>

@@ -10,10 +10,19 @@ nav{
     justify-self: center;
 }
 
+.nav-link{
+    display: flex;
+    flex-direction: row;
+}
+
 .nav-web-title{
     color: var(--text);
     font-size: 2.2em;
     font-weight: bold;
+}
+
+.nav-bot-img{
+    height: 2.2em;
 }
 
 .nav-list{
