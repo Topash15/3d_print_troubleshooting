@@ -13,3 +13,11 @@
 ## License
 
 GNU GPLv3
+
+## Contributors
+
+Alex Topash
+
+## Contact
+
+Alextopash@gmail.com
