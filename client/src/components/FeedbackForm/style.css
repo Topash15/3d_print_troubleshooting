@@ -1,0 +1,43 @@
+.feedback-section{
+    display: grid;
+    margin-left: 15vw;
+    margin-right: 15vw;
+}
+
+.section-title-container{
+    margin-top: 1rem;
+}
+
+.section-title{
+    width: fit-content;
+    padding: 2rem;
+    text-align: left;
+    background-color: var(--secondary);
+    border-radius: 25rem;
+}
+
+
+.feedback-form-container{
+    height: 77vh;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.feedback-text-div{
+    margin-top: 1em;
+}
+
+.feedback-form{
+    width: 80%;
+    height: 550px;
+    margin: 0;
+}
+
+.feedback-input{
+    width:90%;
+}
+
+.feedback-button{
+    margin-top: 10px;
+}

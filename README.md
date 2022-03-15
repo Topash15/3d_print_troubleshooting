@@ -1,17 +1,15 @@
-# 3D Print Troubleshooting
+# 3D Assistant
 
-This application is meant to simplify the vast troubleshooting process required in 3d printing. Simply select the problem that you are experiencing and follow the steps as they are presented. Some steps will have photos or useful links to help you understand or complete the step properly.
-
-## Future Features
-
-The plan is to make the step process reactive based off reported success. Each time someone reports that a step resolved their issue, it would weight that step higher and present it earlier in the process.
-
-I would also like to open the process up to allow users to create accounts and comment on steps with helpful tips. Potentially even allowing them to create problems and steps in order to expand the troubleshooting knowledge.
+## About
+3D Assistant is an interactive website that aims to simplify the process of troubleshooting 3D printers. The user can select the problem that they are having from a list. Once selected, the first step will load. Each step provides instructions for the user to follow. They may include a helpful link or photo as well. If the step does not resolve the problem, the user should select the appropriate response and then next troubleshooting step will appear. 
 
 ## Technologies used
-* HTML
-* CSS
-* JS
 * React
 * MongoDB
+* HTML/JS/CSS
+* Apollo
 * GraphQL
+
+## License
+
+GNU GPLv3

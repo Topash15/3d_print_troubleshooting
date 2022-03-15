@@ -13,19 +13,30 @@ const stepSchema = new Schema({
     require: false,
     trim: true,
   },
-  category: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Problem",
-    },
-  ],
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: "Problem",
+  },
   responses: [
     {
       type: Schema.Types.ObjectId,
       ref: "Response",
-      unique: true,
     },
   ],
+  linkedResponses: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Response",
+    },
+  ],
+  successCount: {
+    type: Number,
+    default: 0
+  },
+  totalCount: {
+    type: Number,
+    default: 0
+  }
 });
 
 const Step = mongoose.model("Step", stepSchema);
