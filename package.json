@@ -15,7 +15,8 @@
     "develop": "concurrently \"cd server && npm run start\" \"cd client && npm run start\"",
     "seed": "cd server && npm run seed",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "concurrently \"cd server && npm i\" \"cd client && npm i\""
+    "install": "concurrently \"cd server && npm i\" \"cd client && npm i\"",
+    "build": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
