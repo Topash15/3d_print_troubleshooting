@@ -98,7 +98,6 @@ function EntryForm() {
       ...stepForm,
       [name]: value,
     });
-    console.log(stepForm);
   };
 
   const validateStep = async (stepForm) => {

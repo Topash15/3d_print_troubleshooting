@@ -48,7 +48,6 @@ function CreateProblemForm() {
       ...problemForm,
       [name]: value,
     });
-    console.log(problemForm);
   };
 
   //used to ensure valid inputs are submitted before creating new problem

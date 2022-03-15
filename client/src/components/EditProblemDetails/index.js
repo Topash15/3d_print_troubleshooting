@@ -50,7 +50,6 @@ function EditStepDetails() {
       ...editForm,
       [name]: value,
     });
-    console.log(editForm);
   };
 
   // used to submit the first step if none are specified
@@ -135,7 +134,6 @@ function EditStepDetails() {
     setStepIsOpen({
       createStep: true,
     });
-    console.log(stepIsOpen);
   };
 
   // matches id to individual step
@@ -158,7 +156,6 @@ function EditStepDetails() {
     setResponseIsOpen({
       createResponse: true,
     });
-    console.log(responseIsOpen);
     dispatch({
       type: UPDATE_CURRENT_STEP,
       currentStep: stepId,
@@ -204,7 +201,6 @@ function EditStepDetails() {
   //     }
   //   })
   // }
-  console.log(stepsData);
 
   return (
     <div>

@@ -1,22 +1,30 @@
+.step-section{
+    margin-left: 15vw;
+    margin-right: 15vw;
+}
+
 .step-container{
     display: flex;
     flex-direction: column;
     justify-content:space-around;
     align-items: center;
-    height: 85vh;
+    height: 80vh;
 }
 
 .step-text{
     display: flex;
     flex-direction: column;
-    height: 25vh;
     justify-content:space-around;
-    margin-left: 40em;
-    margin-right: 40em;
+    margin-left: 15em;
+    margin-right: 15em;
     padding: 1em;
     background-color:var(--secondary);
     color:var(--text);
     border-radius: 0.5em;
+}
+
+.step-success-rate{
+    font-size: .9em;
 }
 
 .step-description{

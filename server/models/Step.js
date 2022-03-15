@@ -29,6 +29,14 @@ const stepSchema = new Schema({
       ref: "Response",
     },
   ],
+  successCount: {
+    type: Number,
+    default: 0
+  },
+  totalCount: {
+    type: Number,
+    default: 0
+  }
 });
 
 const Step = mongoose.model("Step", stepSchema);

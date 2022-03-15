@@ -10,8 +10,6 @@ import "./style.css";
 function ProblemList() {
   // calls global state
   const [state, dispatch] = useGlobalContext();
-  console.log(state);
-
   //   queries db for all Problems
   const { loading, error, data: problemData } = useQuery(QUERY_ALL_PROBLEMS);
   if (loading) {

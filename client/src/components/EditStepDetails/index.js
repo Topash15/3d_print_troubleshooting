@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 function EditStepDetails() {
   // call globalstate
   const [state, dispatch] = useGlobalContext();
-  console.log(state);
   const { id } = useParams();
 
   // queries db for current step data

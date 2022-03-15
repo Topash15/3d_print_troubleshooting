@@ -90,6 +90,38 @@ export const EDIT_PROBLEM = gql`
   }
 `;
 
+export const EDIT_STEP = gql`
+  mutation Mutation(
+    $id: ID!
+    $step: String
+    $description: String
+    $successCount: Int
+    $totalCount: Int
+  ) {
+    editStep(
+      _id: $id
+      step: $step
+      description: $description
+      successCount: $successCount
+      totalCount: $totalCount
+    ) {
+      _id
+      step
+      description
+      category {
+        _id
+      }
+      responses {
+        _id
+        text
+        photo
+      }
+      successCount
+      totalCount
+    }
+  }
+`;
+
 export const ADD_RESPONSE_TO_STEP = gql`
   mutation Mutation($id: ID!, $responses: String!) {
     addResponsesStep(_id: $id, responses: $responses) {
@@ -135,17 +167,17 @@ export const ADD_LINKED_RESPONSE_TO_STEP = gql`
 `;
 
 export const REMOVE_LINKED_RESPONSE_FROM_STEP = gql`
-mutation RemoveLinkedResponsesStep($id: ID!, $linkedResponses: String!) {
-  removeLinkedResponsesStep(_id: $id, linkedResponses: $linkedResponses) {
-    _id
-    step
-    description
-    linkedResponses {
+  mutation RemoveLinkedResponsesStep($id: ID!, $linkedResponses: String!) {
+    removeLinkedResponsesStep(_id: $id, linkedResponses: $linkedResponses) {
       _id
-      text
+      step
+      description
+      linkedResponses {
+        _id
+        text
+      }
     }
   }
-}
 `;
 
 export const EDIT_RESPONSE = gql`

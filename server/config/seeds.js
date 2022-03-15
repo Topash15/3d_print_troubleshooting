@@ -73,5 +73,7 @@ db.once("open", async () => {
     responses: responses2.id
   })
 
+  console.log("steps and responses seeded")
+
   process.exit();
 });

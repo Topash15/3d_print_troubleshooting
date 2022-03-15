@@ -45,6 +45,8 @@ export const QUERY_STEP = gql`
       _id
       step
       description
+      successCount
+      totalCount
       category {
         _id
         name

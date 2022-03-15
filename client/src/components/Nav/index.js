@@ -22,11 +22,11 @@ function Nav() {
             Feedback
           </a>
         </li>
-        <li className="nav-list-item">
+        {/* <li className="nav-list-item">
           <a className="nav-link link" href="/mod-entry">
             Create Entry
           </a>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );

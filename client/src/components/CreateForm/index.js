@@ -67,7 +67,6 @@ function EntryForm() {
       ...problemForm,
       [name]: value,
     });
-    console.log(problemForm);
   };
 
   const validate = async (problemForm) => {
@@ -146,7 +145,6 @@ function EntryForm() {
       ...stepForm,
       [name]: value,
     });
-    console.log(stepForm);
   };
 
   const validateStep = async (stepForm) => {
@@ -228,7 +226,6 @@ function EntryForm() {
       ...responseForm,
       [name]: value,
     });
-    console.log(responseForm);
   };
 
   const filterSteps = () => {

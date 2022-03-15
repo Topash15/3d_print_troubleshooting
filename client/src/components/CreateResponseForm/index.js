@@ -8,7 +8,6 @@ import { useGlobalContext } from "../../utils/GlobalState";
 function CreateResponseForm() {
     // call globalstate
     const [state, dispatch] = useGlobalContext();
-    console.log(state);
 
   // RESPONSE CREATE FUNCTIONS
   // creates state for response form
@@ -56,7 +55,6 @@ function CreateResponseForm() {
       ...responseForm,
       [name]: value,
     });
-    console.log(responseForm);
   };
 
   const validateResponse = async (responseForm) => {
