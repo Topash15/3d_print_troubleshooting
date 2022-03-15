@@ -49,6 +49,7 @@ function StepDetails() {
         successCount: prevCount,
       },
     });
+    navigate('/view-problem-list')
   };
 
   // update total count

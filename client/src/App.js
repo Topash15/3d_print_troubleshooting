@@ -5,7 +5,7 @@ import { setContext } from "@apollo/client/link/context";
 import { Routes, Route} from 'react-router-dom';
 
 // Pages
-import Home from "./pages/Home";
+import ViewProblemList from "./pages/ViewProblemList";
 import Step from "./pages/Step";
 import ModEntry from "./pages/ModEntry";
 import EditProblem from "./pages/EditProblem";
@@ -40,7 +40,7 @@ function App() {
         <GlobalProvider>
           <Routes>
             <Route path='/' element={<LandingPage />}></Route>
-            <Route path='/view-problem-list' element={<Home />}></Route>
+            <Route path='/view-problem-list' element={<ViewProblemList />}></Route>
             <Route path='step/:id' element={<Step />}></Route>
             <Route path='/mod-entry' element={<ModEntry />}></Route>
             <Route path='/edit-problems/:id' element={<EditProblem />}></Route>

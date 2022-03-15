@@ -5,7 +5,7 @@ import Nav from '../components/Nav';
 import ProblemList from '../components/ProblemList';
 import Footer from '../components/Footer';
 
-function Home (){
+function ViewProblemList (){
     return(
         <div>
             < Nav />
@@ -15,4 +15,4 @@ function Home (){
     )
 }
 
-export default Home
+export default ViewProblemList
