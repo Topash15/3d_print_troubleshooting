@@ -5,7 +5,7 @@ import bot from "../../assets/bot.svg";
 function Hero() {
   return (
     <section className="hero flex-column">
-      <div className="hero-text-container container">
+      <div className="hero-text-container container flex-column">
         <h1 className="hero-title">3D Printing Troubleshooting Made Simple</h1>
         <p className="hero-sub-title">
           Select your problem and I'll walk you through the rest!
