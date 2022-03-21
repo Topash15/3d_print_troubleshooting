@@ -17,6 +17,12 @@ https://a-3d-assistant.herokuapp.com/
 
 GNU GPLv3
 
+## Planned Features
+
+* Ability to create a user profile and submit problems/steps directy
+
+* Feedback that automatically ties with current step to make it easier to submit more accurate feedback
+
 ## Contributors
 
 Alex Topash
