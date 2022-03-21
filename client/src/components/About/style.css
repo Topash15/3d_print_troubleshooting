@@ -1,11 +1,14 @@
-.about-container{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 2em;
-    margin: 1em 10%;
+.about-section{
+    background-color: var(--secondary);
+    padding-top: 5em;
+    padding-bottom: 5em;
 }
 
-.about-grid-item{
+.about-container{
+    max-width: 75%;
+}
+
+.about-item{
     background: var(--secondary);
     padding: 1em;
     border: 1px transparent var(--text);
@@ -17,6 +20,12 @@
     align-items: center;
 }
 
-.about-grid-item-title{
-    font-size:1em;
+.about-item-title{
+    font-size:1.2em;
 }
+
+.about-item-text{
+    font-size: 1.15em;
+    line-height: 1.25em;
+    padding: 1em;
+};

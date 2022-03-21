@@ -27,6 +27,9 @@ const typeDefs = gql`
     linkedResponses: [Response]
     successCount: Int
     totalCount: Int
+    links: String
+    photos: String
+    videoLink: String
   }
 
   type Query {
@@ -39,7 +42,6 @@ const typeDefs = gql`
   }
 
   type Mutation {
-
     addProblem(
       name: String!
       description: String!
@@ -60,15 +62,25 @@ const typeDefs = gql`
 
     deleteProblem(_id: ID!): Problem
 
-
     addStep(
       step: String!
       description: String
       links: String
       category: String!
+      photos: String
+      videoLink: String
     ): Step
 
-    editStep(_id: ID!, step: String, description: String, successCount: Int, totalCount: Int): Step
+    editStep(
+      _id: ID!
+      step: String
+      description: String
+      successCount: Int
+      totalCount: Int
+      links: String
+      photos: String
+      videoLink: String
+    ): Step
     addCategoryStep(_id: ID!, category: String!): Step
     addResponsesStep(_id: ID!, responses: String!): Step
     removeResponsesStep(_id: ID!, responses: String!): Step
@@ -76,9 +88,13 @@ const typeDefs = gql`
     removeLinkedResponsesStep(_id: ID!, linkedResponses: String!): Step
     deleteStep(_id: ID, category: String): Step
 
-    
     addResponse(text: String!, photo: String): Response
-    editResponse(_id: ID!, text: String, photo: String, nextStep: String): Response
+    editResponse(
+      _id: ID!
+      text: String
+      photo: String
+      nextStep: String
+    ): Response
     deleteResponse(_id: ID!): Response
   }
 `;

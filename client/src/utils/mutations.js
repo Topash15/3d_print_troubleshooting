@@ -28,6 +28,8 @@ export const CREATE_STEP = gql`
     $category: String!
     $description: String
     $links: String
+    $photos: String
+    $videoLink: String
   ) {
     addStep(
       step: $step
@@ -97,6 +99,9 @@ export const EDIT_STEP = gql`
     $description: String
     $successCount: Int
     $totalCount: Int
+    $links: String
+    $photos: String
+    $videoLink: String
   ) {
     editStep(
       _id: $id

@@ -1,8 +1,17 @@
 nav{
-    background-color: var(--primary);
-    padding-top: 50px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: var(--secondary);
+    padding: 2rem;
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    nav{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
 }
 
 .nav-title-container{
@@ -26,12 +35,21 @@ nav{
 }
 
 .nav-list{
+    margin-left: auto;
+    margin-right: auto;
     grid-column: 2/ 4;
     list-style: none;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-self: center;
+}
+
+@media (max-width: 768px) {
+    .nav-list{
+        flex-direction: column;
+        gap: 0.5em
+    }
 }
 
 .nav-list-item{

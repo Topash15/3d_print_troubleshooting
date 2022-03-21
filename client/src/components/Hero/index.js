@@ -22,8 +22,11 @@ function Hero() {
         </a>
       </div>
       <div className="hero-action-container container">
-        <a className="hero-link link" href="/view-problem-list">
-          Click here to get started!
+        <a className="hero-link link btn-primary" href="/view-problem-list">
+          Get Started
+        </a>
+        <a className="hero-link link btn-inverted" href="#about">
+          Learn More
         </a>
       </div>
     </section>

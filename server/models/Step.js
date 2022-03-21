@@ -36,6 +36,18 @@ const stepSchema = new Schema({
   totalCount: {
     type: Number,
     default: 0
+  },
+  links: {
+    type: String,
+    required: false,
+  },
+  photos: {
+    type: String,
+    required: false,
+  },
+  videoLink: {
+    type: String,
+    required: false,
   }
 });
 

@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import bot from '../../assets/bot.svg'
+import bot from '../../assets/bot_white.png'
 
 function Nav() {
   return (
