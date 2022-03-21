@@ -56,7 +56,7 @@ function ProblemList() {
     <section className="problem-section">
       {/* future search bar */}
       <div className="section-title-container">
-        <h1 className="section-title">What can I help you with?</h1>
+        <h1 className="section-title">What problem are you experiencing?</h1>
       </div>
       <div className="problem-card-container">
         {problemData ? (

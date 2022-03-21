@@ -47,6 +47,9 @@ export const QUERY_STEP = gql`
       description
       successCount
       totalCount
+      links
+      photos
+      videoLink
       category {
         _id
         name

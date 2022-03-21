@@ -1,5 +1,5 @@
 .problem-section{
-    height: 85vh;
+    min-height: 85vh;
     margin-left: 15vw;
     margin-right: 15vw;
 }
@@ -10,10 +10,9 @@
 
 .section-title{
     width: fit-content;
-    padding: 2rem;
+    padding: 1.5rem;
     text-align: left;
     background-color: var(--secondary);
-    border-radius: 25rem;
 }
 
 .problem-card-container{
@@ -24,12 +23,18 @@
     padding: 2em;
 }
 
+@media (max-width: 768px){
+    .problem-card-container{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 .problem-card{
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1px solid var(--secondary);
-    border-radius: 0.5em;
     box-shadow: .2em .2em rgba(0,0,0,0.8);
     padding: 1em;
     background: var(--secondary);

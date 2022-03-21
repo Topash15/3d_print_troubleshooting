@@ -49,7 +49,7 @@ function StepDetails() {
         successCount: prevCount,
       },
     });
-    navigate('/view-problem-list')
+    navigate("/view-problem-list");
   };
 
   // update total count
@@ -87,6 +87,18 @@ function StepDetails() {
             </p>
             <p className="step-description">{data.step.description}</p>
           </div>
+          {data.step.link ? (
+            <a className="step-link" href={data.step.link}>
+              This link may be useful for you.
+            </a>
+          ) : null}
+          {data.step.videoLink ? (
+            <iframe
+              className="step-video"
+              src={data.step.videoLink}
+              title="YouTube video player"
+            ></iframe>
+          ) : null}
           <ul className="response-list">
             <li className="response-list-item">
               <button

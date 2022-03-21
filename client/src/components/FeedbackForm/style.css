@@ -4,21 +4,9 @@
     margin-right: 15vw;
 }
 
-.section-title-container{
-    margin-top: 1rem;
-}
-
-.section-title{
-    width: fit-content;
-    padding: 2rem;
-    text-align: left;
-    background-color: var(--secondary);
-    border-radius: 25rem;
-}
-
 
 .feedback-form-container{
-    height: 77vh;
+    min-height: 77vh;
     display: flex;
     justify-content:center;
     align-items:center;
@@ -39,5 +27,7 @@
 }
 
 .feedback-button{
+    width: 50%;
     margin-top: 10px;
+    color: var(--secondary);
 }

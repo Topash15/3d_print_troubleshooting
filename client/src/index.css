@@ -1,10 +1,10 @@
 /* Main Page */
 
 :root{
-  --primary: #33E09B;
-  --secondary: #7AE6BA;
+  --primary: white;
+  --secondary: black;
   --tertiary: #324869;
-  --text: #166143;
+  --text: white;
   background: var(--primary);
 }
 
@@ -39,3 +39,22 @@ html {
   font-style: none;
   text-decoration: none;
 }
+
+.btn-primary {
+  background-color: var(--secondary);
+  border: 4px solid var(--secondary);
+  padding: .75em;
+}
+
+.btn-primary:hover{
+  background-color: transparent;
+}
+
+.btn-inverted{
+  border: 4px solid var(--secondary);
+  padding: .75em;
+}
+
+.btn-inverted:hover{
+  background-color: var(--secondary);
+};

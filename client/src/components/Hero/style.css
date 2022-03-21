@@ -1,61 +1,48 @@
-.hero{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    margin-left: 10%;
-    margin-right: 10%;
-    height: 80vh;
-    padding-top: 2%;
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 80vh;
+  padding-top: 2%;
+  background-image: url(../../assets/3DBenchy.jpg);
+  background-position: center;
 }
 
-.container{
-    background: var(--secondary);
-    padding: 0.5em 0.5em;
-    border: 1px transparent var(--text);
-    border-radius: 1em;
-    box-shadow: 1px 1px rgba(0,0,0,0.2);
+.container {
+  padding: 0.5em 0.5em;
 }
 
-.hero-text-container{
-    left: 15%;
-    top: 15%;
-    padding: 2em;
+.hero-text-container {
+  padding-top: 5em;
 }
 
-.hero-title{
-    font-size: 2.8em;
-    font-weight: lighter;
+.hero-title {
+  font-size: 2.8em;
+  font-weight: lighter;
 }
 
-.hero-sub-title{
-    font-size: 1.5em;
+.hero-sub-title {
+  font-size: 1.5em;
 }
 
-.hero-image-container{
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+.hero-image-container {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-.hero-image{
-    position: relative;
-    top: 15%;
-    height: 9rem;
+.hero-image {
+  position: relative;
+  width: 10rem;
 }
 
-.hero-action-container{
-    grid-column: 2;
-    grid-row: 2;
-    position: relative;
-    width: 110%;
-    min-height: 10em;
-    right: 15%;
-    bottom: 15%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.hero-action-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 50%;
 }
 
-.hero-link{
-    font-size: 1.5em;
+.hero-link {
+  font-size: 1.5em;
 }
