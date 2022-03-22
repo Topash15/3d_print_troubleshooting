@@ -3,7 +3,7 @@ import "./style.css";
 
 function AboutComponent() {
   return (
-    <section id="about" className="about-section flex-column">
+    <section data-test-id="about" id="about" className="about-section flex-column">
       <h1>About</h1>
       <div className="about-container">
         <div className="about-item">
