@@ -36,14 +36,12 @@ export const CREATE_STEP = gql`
       category: $category
       description: $description
       links: $links
+      photos: $photos
+      videoLink: $videoLink
     ) {
       _id
       step
       description
-      category {
-        _id
-        name
-      }
     }
   }
 `;

@@ -4,10 +4,9 @@ import { useGlobalContext } from "../../utils/GlobalState";
 import { QUERY_ALL_PROBLEMS } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 import { UPDATE_PROBLEMS } from "../../utils/actions";
-import {useNavigate} from 'react-router-dom'
-import plus from '../../assets/plus.svg'
+import { useNavigate } from "react-router-dom";
+import plus from "../../assets/plus.svg";
 import CreateProblemForm from "../CreateProblemForm";
-
 
 function EditForm() {
   // calls global state
@@ -37,35 +36,46 @@ function EditForm() {
     navigate(`/edit-problems/${id}`);
   };
 
-  const [problemIsOpen, setProblemIsOpen] = useState({createProblem: false});
+  const [problemIsOpen, setProblemIsOpen] = useState({ createProblem: false });
 
   const createProblem = (e) => {
     setProblemIsOpen({
-      createProblem: true
-    })
-  }
+      createProblem: true,
+    });
+  };
 
   return (
     <div>
-        {problemIsOpen.createProblem ? (<CreateProblemForm />):(
+      {problemIsOpen.createProblem ? (
+        <CreateProblemForm />
+      ) : (
         <div>
-          <h1>Select a problem to edit</h1>
-          <p>
+          <h1 className="problem-selection-title">Select a problem to edit</h1>
+          <p className="problem-selection-description">
             Once selected, you can edit existing problems and responses within
             the problem.
           </p>
           <div>
             {problemData ? (
               <div className="problem-card-container">
-                <div className="problem-card" id="add-problem" onClick={createProblem}>
+                <div
+                  className="problem-card"
+                  id="add-problem"
+                  onClick={createProblem}
+                >
                   <h2 className="problem-card-title">Add a problem</h2>
-                  <img className="problem-card-image" src={plus} alt="add Problem"/>
+                  <img
+                    className="problem-card-image"
+                    src={plus}
+                    alt="add Problem"
+                  />
                 </div>
                 {problemData.problems.map((problem) => (
                   <div
                     id={problem._id}
                     className="problem-card"
                     key={problem._id}
+                    onClick={selectProblem}
                   >
                     <h2 className="problem-card-title">{problem.name}</h2>
                     <p className="problem-card-description">
@@ -92,25 +102,19 @@ function EditForm() {
                         <h4 className="first-step-title">
                           {problem.firstStep.step}
                         </h4>
-                        {/* <p className="first-step-description">
-                          {problem.firstStep.description}
-                        </p> */}
                       </div>
                     ) : (
                       <div className="first-step-div">
                         <h4>No First Step Defined</h4>
                       </div>
-                    )}
-                    <button id={problem._id} onClick={selectProblem}>
-                      Select
-                    </button>
+                    )}{" "}
                   </div>
                 ))}
               </div>
             ) : null}
           </div>
         </div>
-        )}
+      )}
     </div>
   );
 }

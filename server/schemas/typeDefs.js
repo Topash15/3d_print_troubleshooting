@@ -66,6 +66,8 @@ const typeDefs = gql`
       step: String!
       description: String
       links: String
+      successCount: Int
+      totalCount: Int
       category: String!
       photos: String
       videoLink: String
@@ -81,6 +83,7 @@ const typeDefs = gql`
       photos: String
       videoLink: String
     ): Step
+    
     addCategoryStep(_id: ID!, category: String!): Step
     addResponsesStep(_id: ID!, responses: String!): Step
     removeResponsesStep(_id: ID!, responses: String!): Step

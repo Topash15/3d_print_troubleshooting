@@ -91,7 +91,7 @@ function CreateProblemForm() {
         ></textarea>
         <label>Photo Direct Link</label>
         <input name="photo" type="text" onChange={handleChange}></input>
-        <button type="submit"> Submit </button>
+        <button className="btn-light" type="submit"> Submit </button>
       </form>
     </section>
   );
