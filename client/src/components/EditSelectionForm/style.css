@@ -1,0 +1,12 @@
+.problem-selection-title{
+    color: var(--secondary);
+}
+
+.problem-selection-description{
+    color: var(--secondary);
+}
+
+.problem-card-button{
+    color: var(--secondary);
+    padding: 1em;
+}

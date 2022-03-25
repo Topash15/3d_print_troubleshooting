@@ -44,10 +44,12 @@ html {
   background-color: var(--secondary);
   border: 4px solid var(--secondary);
   padding: .75em;
+  color: var(--text);
 }
 
 .btn-primary:hover{
   background-color: transparent;
+  color: var(--secondary);
 }
 
 .btn-inverted{
@@ -57,4 +59,34 @@ html {
 
 .btn-inverted:hover{
   background-color: var(--secondary);
-};
+}
+
+.btn-light{
+  background-color:var(--text);
+  color: var(--secondary);
+  padding: .75em;
+}
+
+.disabled{
+  opacity: .5;
+}
+
+.title{
+  color: var(--secondary);
+}
+
+.title-light{
+  color: var(--text);
+}
+
+.text-dark{
+  color: var(--secondary);
+}
+
+.text-light{
+  color: var(--text);
+}
+
+.no-hover{
+  pointer-events: none;
+}

@@ -55,6 +55,7 @@ function EntryForm() {
   async function submitStepHandler(e) {
     e.preventDefault();
     const valid = await validateStep(stepForm);
+    console.log(stepForm)
 
     if (!valid) {
       console.log(stepForm.errors);
@@ -119,11 +120,11 @@ function EntryForm() {
         message: "Valid problem is required",
       });
     }
-    if (!responseText){
+    if (!responseText) {
       errors.push({
         type: "responseText",
-        message: "Invalid response text."
-      })
+        message: "Invalid response text.",
+      });
     }
 
     setStepForm({
@@ -151,7 +152,12 @@ function EntryForm() {
         {!id && problemData ? (
           <div>
             <label>To which problem does this step belong?</label>
-            <select name="problem" defaultValue="" onChange={handleStepChange}>
+            <select
+              className="text-dark"
+              name="problem"
+              defaultValue=""
+              onChange={handleStepChange}
+            >
               <option value="">Choose a problem</option>
               {problemData.problems.map((problem) => (
                 <option key={problem._id} value={problem._id}>
@@ -162,17 +168,33 @@ function EntryForm() {
           </div>
         ) : null}
         <label>Title</label>
-        <input type="text" name="name" onChange={handleStepChange}></input>
+        <input
+          className="text-dark"
+          type="text"
+          name="name"
+          onChange={handleStepChange}
+        ></input>
         <label>Description</label>
         <textarea
+          className="text-dark"
           name="description"
           type="text"
           onChange={handleStepChange}
         ></textarea>
         <label>Photo Direct Link</label>
-        <input name="photo" type="text" onChange={handleStepChange}></input>
+        <input
+          className="text-dark"
+          name="photo"
+          type="text"
+          onChange={handleStepChange}
+        ></input>
         <label>Useful URL</label>
-        <input name="link" type="text" onChange={handleStepChange}></input>
+        <input
+          className="text-dark"
+          name="link"
+          type="text"
+          onChange={handleStepChange}
+        ></input>
         <h1 className="form-title">Response</h1>
         <p className="form-side-note">
           Note that the{" "}
@@ -183,10 +205,20 @@ function EntryForm() {
           the step was not successful in solving problem.
         </p>
         <label>Response Text</label>
-        <input type="text" name="responseText" onChange={handleStepChange}></input>
+        <input
+        className="text-dark"
+          type="text"
+          name="responseText"
+          onChange={handleStepChange}
+        ></input>
         <label>Response Photo Link</label>
-        <input type="text" name="responsePhoto" onChange={handleStepChange}></input>
-        <button>Submit</button>
+        <input
+        className="text-dark"
+          type="text"
+          name="responsePhoto"
+          onChange={handleStepChange}
+        ></input>
+        <button className="btn-light">Submit</button>
       </form>
     </section>
   );

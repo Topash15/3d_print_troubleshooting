@@ -173,6 +173,7 @@ function EditStepDetails() {
   const [addLinkedResponseStep] = useMutation(ADD_LINKED_RESPONSE_TO_STEP);
   const [editResponse] = useMutation(EDIT_RESPONSE);
   const submitNextStep = async (e) => {
+    console.log(editForm)
     e.preventDefault();
     const responseId = e.target.dataset.id;
     const mutationResponse = await editResponse({
@@ -207,9 +208,11 @@ function EditStepDetails() {
       {!stepsData || !stepsData.steps.length || stepIsOpen.createStep ? (
         <div className="create-step-container">
           {!stepIsOpen.createStep ? (
-            <h3>This problem has no steps. Please create a step.</h3>
+            <h2 className="title">
+              This problem has no steps. Please create a step.
+            </h2>
           ) : (
-            <h3>Create a Step</h3>
+            <h2 className="title">Create a Step</h2>
           )}
           <CreateStepForm />
         </div>
@@ -217,22 +220,22 @@ function EditStepDetails() {
         <div>
           <div className="problem-edit-card-container">
             <div className="problem-edit-card">
-              <h1 className="problem-card-heading">Problem</h1>
-              <h2 className="problem-card-title">Problem Name:</h2>
-              <p className="problem-card-name">
+              <h1 className="problem-card-heading title">Problem</h1>
+              <h2 className="problem-card-title title">Problem Name:</h2>
+              <p className="problem-card-name text-dark">
                 {stepsData.steps[0].category.name}
               </p>
-              <h2 className="problem-card-title">Problem Description:</h2>
-              <p className="problem-card-description">
+              <h2 className="problem-card-title title">Problem Description:</h2>
+              <p className="problem-card-description text-dark">
                 {stepsData.steps[0].category.description}
               </p>
-              <h2 className="problem-card-title">Link:</h2>
+              <h2 className="problem-card-title title">Link:</h2>
               {stepsData.steps[0].category.link ? (
                 <a href={stepsData.steps[0].category.link} />
               ) : (
-                <p className="problem-card-link">No Link</p>
+                <p className="problem-card-link text-dark">No Link</p>
               )}
-              <h2 className="problem-card-title">Photo:</h2>
+              <h2 className="problem-card-title title">Photo:</h2>
               {stepsData.steps[0].category.photos ? (
                 <img
                   className="problem-card-photo"
@@ -240,35 +243,39 @@ function EditStepDetails() {
                   alt={stepsData.steps[0].category.name}
                 />
               ) : (
-                <p className="problem-card-photo">No photo</p>
+                <p className="problem-card-photo text-dark">No photo</p>
               )}
               {stepsData.steps[0].category.firstStep ? (
                 <div>
                   {/* <button className="edit-btn" onClick={editProblemBtn}>
                     EDIT
                   </button> */}
-                  <button className="delete-btn" onClick={deleteProblemBtn}>
+                  <button
+                    className="delete-btn btn-primary"
+                    onClick={deleteProblemBtn}
+                  >
                     DELETE
                   </button>
-                  <h2 className="problem-card-title">First Step</h2>
-                  <p className="problem-card-first-step">
+                  <h2 className="problem-card-title title">First Step</h2>
+                  <p className="problem-card-first-step text-dark">
                     {findStep(stepsData.steps[0].category.firstStep._id).step}
                   </p>
                 </div>
               ) : (
                 <form onSubmit={submitFirstStep}>
-                  <h3>
+                  <p className="title">
                     No first step specified. Please select a first step and
                     click confirm.
-                  </h3>
+                  </p>
                   <select
+                    className="text-dark"
                     name="firstStep"
                     onChange={onChangeEditForm}
                     defaultValue=""
                   >
-                    <option value="">Choose a step</option>
+                    <option className="text-dark" value="">Choose a step</option>
                     {stepsData.steps.map((step) => (
-                      <option key={step._id} value={step._id}>
+                      <option className="text-dark" key={step._id} value={step._id}>
                         {step.step}
                       </option>
                     ))}
@@ -299,7 +306,7 @@ function EditStepDetails() {
                     </button> */}
                     <button
                       data-id={step._id}
-                      className="delete-btn"
+                      className="delete-btn btn-light"
                       onClick={deleteStepBtn}
                     >
                       DELETE
@@ -329,13 +336,17 @@ function EditStepDetails() {
                             >
                               <h3>NO NEXT STEP SET</h3>
                               <select
+                                className="text-dark"
                                 name="nextStep"
                                 onChange={onChangeEditForm}
                                 defaultValue=""
                               >
-                                <option value="">Pick a next Step</option>
+                                <option className="text-dark" value="">
+                                  Pick a next Step
+                                </option>
                                 {filterSteps(step._id).map((nextStep) => (
                                   <option
+                                    className="text-dark"
                                     key={nextStep._id}
                                     value={nextStep._id}
                                   >
@@ -343,13 +354,15 @@ function EditStepDetails() {
                                   </option>
                                 ))}
                               </select>
-                              <button>Submit</button>
+                              <button className="btn-light">
+                                Submit
+                              </button>
                             </form>
                           )}
                           {step.responses.length > 1 ? (
                             <button
                               data-id={step._id}
-                              className="delete-btn"
+                              className="delete-btn btn-light"
                               id={response._id}
                               // onClick={deleteResponse}
                             >
@@ -361,7 +374,12 @@ function EditStepDetails() {
                                 Must have more than one response in a step
                                 before you can delete a response.
                               </p>
-                              <button disabled>DELETE</button>
+                              <button
+                                className="btn-light disabled"
+                                disabled
+                              >
+                                DELETE
+                              </button>
                             </div>
                           )}
                         </li>
@@ -372,7 +390,7 @@ function EditStepDetails() {
                     <li>
                       <button
                         data-id={step._id}
-                        className="add-btn"
+                        className="add-btn btn-light"
                         onClick={createResponse}
                       >
                         Add Response
