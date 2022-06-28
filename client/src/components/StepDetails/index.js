@@ -65,6 +65,9 @@ function StepDetails() {
 
   // calculate success percentage
   const calcSuccessPercentage = (successCount, Total) => {
+    if (!successCount || !Total) {
+      return 0;
+    }
     return ((successCount / Total) * 100).toFixed(2);
   };
 
@@ -87,10 +90,17 @@ function StepDetails() {
             </p>
             <p className="step-description">{data.step.description}</p>
           </div>
-          {data.step.link ? (
-            <a className="step-link" href={data.step.link}>
+          {data.step.links ? (
+            <a className="step-link" href={data.step.links}>
               This link may be useful for you.
             </a>
+          ) : null}
+          {data.step.photos ? (
+            <img
+              className="step-photos"
+              src={data.step.photos}
+              alt={data.step.step}
+            ></img>
           ) : null}
           {data.step.videoLink ? (
             <iframe

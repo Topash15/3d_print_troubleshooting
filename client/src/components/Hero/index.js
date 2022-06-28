@@ -23,7 +23,7 @@ function Hero() {
       </div>
       <div className="hero-action-container container">
         <a className="hero-link link btn-primary" href="/view-problem-list">
-          Get Started
+          Start Troubleshooting
         </a>
         <a className="hero-link link btn-inverted" href="#about">
           Learn More

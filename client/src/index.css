@@ -3,9 +3,10 @@
 :root{
   --primary: white;
   --secondary: black;
-  --tertiary: #324869;
-  --text: white;
-  background: var(--primary);
+  --tertiary: rgb(100, 197, 100);
+  --text: rgb(236, 236, 236);
+  --background: #3e4346;
+  background: var(--background);
 }
 
 * {

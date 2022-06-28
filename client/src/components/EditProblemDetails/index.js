@@ -229,12 +229,13 @@ function EditStepDetails() {
               <p className="problem-card-description text-dark">
                 {stepsData.steps[0].category.description}
               </p>
-              <h2 className="problem-card-title title">Link:</h2>
+              {/* Link can be added in at later date */}
+              {/* <h2 className="problem-card-title title">Link:</h2>
               {stepsData.steps[0].category.link ? (
                 <a href={stepsData.steps[0].category.link} />
               ) : (
                 <p className="problem-card-link text-dark">No Link</p>
-              )}
+              )} */}
               <h2 className="problem-card-title title">Photo:</h2>
               {stepsData.steps[0].category.photos ? (
                 <img
@@ -256,7 +257,7 @@ function EditStepDetails() {
                   >
                     DELETE
                   </button>
-                  <h2 className="problem-card-title title">First Step</h2>
+                  <h2 className="problem-card-title title">First Step:</h2>
                   <p className="problem-card-first-step text-dark">
                     {findStep(stepsData.steps[0].category.firstStep._id).step}
                   </p>
@@ -318,11 +319,6 @@ function EditStepDetails() {
                       step.responses.map((response) => (
                         <li id={response._id} key={response._id}>
                           <h3>{response.text}</h3>
-                          {response.photo ? (
-                            <img src={response.photo} alt={response.text} />
-                          ) : (
-                            <p>No photo</p>
-                          )}
                           {response.nextStep ? (
                             <div>
                               <h3>NextStep</h3>

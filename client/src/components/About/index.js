@@ -9,9 +9,8 @@ function AboutComponent() {
         <div className="about-item">
           <h2 className="about-item-title">Our Goal</h2>
           <p className="about-item-text">
-            The goal of 3D Assistant is to simplify the process of
-            troubleshooting your 3D printer. This hobby is full of twists and
-            turns that can make it difficult to simply print your creation.
+            The goal of 3D Assistant is simple: make troubleshooting your 3D printer easy. This hobby is full of twists and
+            turns that can make it difficult to simply print your creation. 3D Assistant wants to change that.
           </p>
         </div>
         <div className="about-item">

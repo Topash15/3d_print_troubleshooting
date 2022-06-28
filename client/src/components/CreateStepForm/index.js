@@ -55,7 +55,7 @@ function EntryForm() {
   async function submitStepHandler(e) {
     e.preventDefault();
     const valid = await validateStep(stepForm);
-    console.log(stepForm)
+    console.log(stepForm);
 
     if (!valid) {
       console.log(stepForm.errors);
@@ -65,7 +65,8 @@ function EntryForm() {
         variables: {
           step: stepForm.name,
           description: stepForm.description,
-          // photos: stepForm.photo,
+          photos: stepForm.photo,
+          videoLink: stepForm.video,
           links: stepForm.link,
           category: stepForm.problem,
         },
@@ -148,7 +149,7 @@ function EntryForm() {
   return (
     <section className="step-form hidden">
       <form className="form createStep" onSubmit={submitStepHandler}>
-        <h1 className="form-title">Step</h1>
+        <h2 className="form-title">Step</h2>
         {!id && problemData ? (
           <div>
             <label>To which problem does this step belong?</label>
@@ -188,6 +189,17 @@ function EntryForm() {
           type="text"
           onChange={handleStepChange}
         ></input>
+        <label>Youtube Embeded Link</label>
+        <p className="form-side-note">
+          Right click on a youtube video and copy the embeded code in order to
+          get the youtube.com/embed link
+        </p>
+        <input
+          className="text-dark"
+          name="video"
+          type="text"
+          onChange={handleStepChange}
+        ></input>
         <label>Useful URL</label>
         <input
           className="text-dark"
@@ -195,7 +207,7 @@ function EntryForm() {
           type="text"
           onChange={handleStepChange}
         ></input>
-        <h1 className="form-title">Response</h1>
+        <h2 className="form-title">Response</h2>
         <p className="form-side-note">
           Note that the{" "}
           <i>
@@ -206,19 +218,19 @@ function EntryForm() {
         </p>
         <label>Response Text</label>
         <input
-        className="text-dark"
+          className="text-dark"
           type="text"
           name="responseText"
           onChange={handleStepChange}
         ></input>
         <label>Response Photo Link</label>
         <input
-        className="text-dark"
+          className="text-dark"
           type="text"
           name="responsePhoto"
           onChange={handleStepChange}
         ></input>
-        <button className="btn-light">Submit</button>
+        <button className="btn-light form-submit-btn">Submit</button>
       </form>
     </section>
   );

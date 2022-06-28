@@ -36,7 +36,6 @@ nav{
 
 .nav-list{
     margin-left: auto;
-    margin-right: auto;
     grid-column: 2/ 4;
     list-style: none;
     display: flex;
@@ -56,8 +55,21 @@ nav{
     margin-left: 1em;
     margin-right: 1em;
     font-size: 1.5em;
-    /* border: 1px solid var(--text); */
-    /* border-radius: 1em; */
+}
+
+.nav-link{
+    padding: 0.5em;
+}
+
+.call-to-action{
+    background-color: var(--text);
+    color: var(--secondary);
+}
+
+.call-to-action:hover{
+    border: 1px solid var(--text);
+    background-color: var(--secondary);
+    color: var(--text);
 }
 
 .nav-list-item:hover{
