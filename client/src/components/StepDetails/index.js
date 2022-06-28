@@ -40,7 +40,9 @@ function StepDetails() {
   // allows for editing step mutation
   const [editStep] = useMutation(EDIT_STEP);
 
-  // used to add to step success counter
+  /**
+   *  Adds one to step success counter
+   * */
   const addSuccess = async (prevCount) => {
     prevCount++;
     const mutationResponse = await editStep({
@@ -52,9 +54,10 @@ function StepDetails() {
     navigate("/view-problem-list");
   };
 
-  // update total count
+  /**Updates the success counter */
   const updateTotalCount = async (prevCount) => {
     prevCount++;
+    console.log(id)
     const mutationResponse = await editStep({
       variables: {
         id: id,
