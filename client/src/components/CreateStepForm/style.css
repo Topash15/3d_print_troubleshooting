@@ -3,8 +3,7 @@ form{
     flex-direction: column;
     justify-content:center;
     align-items:center;
-    margin-left: 25em;
-    margin-right: 25em;
+    margin:1rem 25rem;
     padding: 0.5em;
     background-color: var(--secondary);
 }
@@ -28,12 +27,18 @@ label{
 
 .form-title{
     color: var(--text);
-    background-repeat: no-repeat;
+    margin-top: .5em;    
 }
 
 .form-side-note{
     color: var(--text);
     padding: .5em;
+}
+
+.form-submit-btn{
+    margin: .5rem;
+    font-size: 1.1em;
+    font-weight: bold;
 }
 
 /* .hidden{

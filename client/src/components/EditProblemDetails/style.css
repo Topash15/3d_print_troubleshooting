@@ -1,72 +1,84 @@
-.problem-edit-card{
-    border: 1px solid
+.problem-edit-card {
+  border: 1px solid;
+  margin: 5em auto;
+  max-width: 60%;
+  color: var(--text);
+  border: none;
 }
 
-.step-card-container{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-gap: 15px 15px;
+.problem-card-photo {
+  width: 35%;
 }
 
-.step-card{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid var(--secondary);
-    border-radius: 0.5em;
-    box-shadow: .2em .2em rgba(0,0,0,0.8);
-    padding: 1em;
-    background: var(--secondary);
-    color: var(--text);
-    width: 600px;
+.step-card-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 15px 15px;
 }
 
-.step-card:hover{
-    box-shadow: .2em .2em inset rgba(0,0,0,0.5);
+.step-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--secondary);
+  border-radius: 0.5em;
+  box-shadow: 0.2em 0.2em rgba(0, 0, 0, 0.8);
+  padding: 1em;
+  background: var(--secondary);
+  color: var(--text);
+  width: 600px;
 }
 
-
-
-.step-card-image{
-    width: 10em;
+.step-card:hover {
+  box-shadow: 0.2em 0.2em inset rgba(0, 0, 0, 0.5);
 }
 
-.step-card-title{
-    font-weight: normal;
-    padding: .5em;
-    letter-spacing: .05em;
+.step-card-image {
+  width: 10em;
 }
 
-.step-card-description{
-    font-family: sans-serif;
-    letter-spacing: .05em;
+.step-card-title {
+  font-weight: normal;
+  padding: 0.5em;
+  letter-spacing: 0.05em;
 }
 
-.create-response-background{
-    display: flex;
-    justify-content:center;
-    align-items:center;
-    position: fixed;
-    background: rgba(0,0,0,0.5);
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+.step-card-description {
+  font-family: sans-serif;
+  letter-spacing: 0.05em;
 }
 
-.response-form-container{
-    background: var(--secondary);
-    border-radius: .5em;
-    width:30%;
+.create-response-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 
-.close-response-form{
-    position: relative;
-    right: -20%;
-    top: 0;
+.response-form-container {
+  background: var(--secondary);
+  border-radius: 0.5em;
+  width: 30%;
 }
 
-.response-next-step-form{
-    margin: 0;
+.close-response-form {
+  position: relative;
+  right: -20%;
+  top: 0;
+}
+
+.response-next-step-form {
+  margin: 0;
+}
+
+.title{
+  color: var(--text);
+  margin-top: 1em;
+  font-size: 1.5em;
 }

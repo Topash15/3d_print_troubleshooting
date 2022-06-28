@@ -91,7 +91,7 @@ export const EDIT_PROBLEM = gql`
 `;
 
 export const EDIT_STEP = gql`
-  mutation Mutation(
+  mutation EditStep(
     $id: ID!
     $step: String
     $description: String
@@ -107,6 +107,9 @@ export const EDIT_STEP = gql`
       description: $description
       successCount: $successCount
       totalCount: $totalCount
+      links: $links
+      photos: $photos
+      videoLink: $videoLink
     ) {
       _id
       step
@@ -116,11 +119,15 @@ export const EDIT_STEP = gql`
       }
       responses {
         _id
-        text
-        photo
+      }
+      linkedResponses {
+        _id
       }
       successCount
       totalCount
+      links
+      photos
+      videoLink
     }
   }
 `;
